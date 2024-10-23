@@ -1,0 +1,60 @@
+/* Body Styling */
+body {
+    font-family: 'Roboto', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a23; /* Dark blue-black background */
+    color: #ffffff; /* White text */
+}
+
+/* Header Styling */
+header {
+    text-align: left; /* Align text to the left */
+    padding: 5px; /* Reduced padding */
+}
+
+/* Navigation Links Styling */
+nav a {
+    margin: 2px 0; /* Reduced margin for tighter links */
+    text-decoration: none; /* Remove underline from links by default */
+    color: #00adb5; /* Teal color for hyperlinks */
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth color transition */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Add underline on hover */
+    color: #FF5733; /* Change color on hover */
+}
+
+/* Project Section Styling */
+section {
+    padding: 5px 0; /* Reduced padding */
+    text-align: left; /* Align text to the left in sections */
+}
+
+.project {
+    margin: 2px 0; /* Further reduced margin */
+    padding: 5px; /* Reduced padding for a more compact design */
+    border-radius: 2px;
+    color: #ffffff; /* White text in sections */
+}
+.project h3 {
+    text-decoration: underline; /* Underline the project titles */
+    color: #00adb5; /* Optional: Change the color of the titles to match your theme */
+}
+
+/* Footer Styling */
+footer {
+    padding: 5px 0; /* Reduced padding */
+    color: #ffffff;
+    text-align: left; /* Align text to the left in footer */
+}
+
+footer a {
+    color: #00adb5; /* Teal color for hyperlinks in footer */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
