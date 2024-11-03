@@ -23,50 +23,50 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
-    color:#2211b8 !important; /* Light teal color on hover */
+    color:#2211b8 !important; 
 }
 
 nav a:visited {
-    color: #2211b8 !important; /* Dark teal color for visited links */
+    color: #2211b8 !important; 
 }
 
 /* Project Section Styling */
 section {
-    padding: 5px 0; /* Reduced padding */
-    text-align: left; /* Align text to the left in sections */
+    padding: 5px 0; 
+    text-align: left; 
 }
 
 .project {
-    margin: 2px 0; /* Further reduced margin */
-    padding: 5px; /* Reduced padding for a more compact design */
+    margin: 2px 0;
+    padding: 5px; 
     border-radius: 2px;
-    color: #ffffff; /* White text in sections */
+    color: #ffffff; 
 }
 
 .project h3 {
-    text-decoration: underline; /* Underline the project titles */
-    color: #00adb5; /* Teal color for project titles */
+    text-decoration: underline; 
+    color: #f8f9f9; 
 }
 
 /* Footer Styling */
 footer {
-    padding: 5px 0; /* Reduced padding */
+    padding: 5px 0; 
     color: #ffffff;
-    text-align: left; /* Align text to the left in footer */
+    text-align: left; 
 }
 
 /* Footer Links Styling */
 footer a {
-    color: #00adb5 !important; /* Teal color for hyperlinks in footer */
+    color: #2211b8 !important; 
     text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
 }
 
 footer a:hover {
     text-decoration: underline;
-    color: #8ac6d1 !important; /* Light teal color on hover */
+    color: #8ac6d1 !important;
 }
 
 footer a:visited {
-    color: #007a7e !important; /* Dark teal color for visited links */
+    color: #007a7e !important; 
 }
