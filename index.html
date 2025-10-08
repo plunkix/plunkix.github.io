@@ -124,7 +124,7 @@ constructor() {
         }
 
         .hero-content h1 {
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue), var(--pastel-pink));
@@ -135,7 +135,7 @@ constructor() {
         }
 
         .hero-content .tagline {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--pastel-blue);
             margin-bottom: 2rem;
             font-weight: 300;
@@ -162,7 +162,7 @@ constructor() {
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 3rem;
             text-align: center;
@@ -197,7 +197,7 @@ constructor() {
         /* 3D Tech Stack Sphere */
         #tech-sphere {
             width: 100%;
-            height: 650px;
+            height: 500px;
             margin: 2rem auto;
             cursor: grab;
         }
@@ -232,7 +232,7 @@ constructor() {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 2rem;
             border: 1px solid rgba(180, 167, 214, 0.3);
             transition: all 0.4s ease;
             opacity: 0;
@@ -270,7 +270,7 @@ constructor() {
         }
 
         .project-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--pastel-blue);
             margin-bottom: 0.5rem;
@@ -279,22 +279,22 @@ constructor() {
         .project-badge {
             background: linear-gradient(135deg, var(--pastel-mint), var(--pastel-peach));
             color: var(--dark-bg);
-            padding: 0.5rem 1.2rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
         }
 
         .project-subtitle {
             color: var(--pastel-pink);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .project-description {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 1.5rem;
             line-height: 1.8;
             opacity: 0.9;
@@ -314,7 +314,7 @@ constructor() {
         }
 
         .metric-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--pastel-blue);
             display: block;
@@ -322,7 +322,7 @@ constructor() {
         }
 
         .metric-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             opacity: 0.7;
             font-weight: 400;
         }
@@ -337,7 +337,7 @@ constructor() {
 
         .project-video iframe {
             width: 100%;
-            height: 400px;
+            height: 350px;
             border: none;
         }
 
@@ -347,10 +347,10 @@ constructor() {
         }
 
         .project-highlights li {
-            padding: 0.6rem 0 0.6rem 1.8rem;
+            padding: 0.5rem 0 0.5rem 1.8rem;
             position: relative;
             opacity: 0.85;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .project-highlights li::before {
@@ -546,7 +546,11 @@ constructor() {
         /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 1.1rem;
             }
 
             .about-grid {
@@ -564,7 +568,7 @@ constructor() {
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .other-projects-grid {
@@ -850,176 +854,180 @@ constructor() {
 
     <script>
         // 3D Tech Stack Sphere
-        const techSphere = document.getElementById('tech-sphere');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, techSphere.clientWidth / techSphere.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
-        techSphere.appendChild(renderer.domElement);
-
-        camera.position.z = 15;
-
-        // Tech stack icons - using your GitHub assets
-        const baseURL = 'https://ifelsecry.xyz/assets/';
-        const techs = [
-            { name: 'PyTorch', img: baseURL + 'pytorch.png' },
-            { name: 'TensorFlow', img: baseURL + 'tensorflow.png' },
-            { name: 'OpenCV', img: baseURL + 'opencv.png' },
-            { name: 'Python', img: baseURL + 'python.png' },
-            { name: 'Docker', img: baseURL + 'docker.png' },
-            { name: 'NumPy', img: baseURL + 'numpy.png' },
-            { name: 'Pandas', img: baseURL + 'pandas.png' },
-            { name: 'Jupyter', img: baseURL + 'jupyter.png' }
-        ];
-
-        const objects = [];
-        const radius = 9; // Increased radius for better spacing
-
-        // Function to create sprite from image
-        function createSpriteFromImage(imgUrl, callback) {
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
+        try {
+            const techSphere = document.getElementById('tech-sphere');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, techSphere.clientWidth / techSphere.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                canvas.width = 512;
-                canvas.height = 512;
-                const ctx = canvas.getContext('2d');
+            renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+            techSphere.appendChild(renderer.domElement);
+
+            camera.position.z = 15;
+
+            // Tech stack icons - using your GitHub assets
+            const baseURL = 'https://ifelsecry.xyz/assets/';
+            const techs = [
+                { name: 'PyTorch', img: baseURL + 'pytorch.png' },
+                { name: 'TensorFlow', img: baseURL + 'tensorflow.png' },
+                { name: 'OpenCV', img: baseURL + 'opencv.png' },
+                { name: 'Python', img: baseURL + 'python.png' },
+                { name: 'Docker', img: baseURL + 'docker.png' },
+                { name: 'NumPy', img: baseURL + 'numpy.png' },
+                { name: 'Pandas', img: baseURL + 'pandas.png' },
+                { name: 'Jupyter', img: baseURL + 'jupyter.png' }
+            ];
+
+            const objects = [];
+            const radius = 8.5; // Balanced radius
+
+            // Function to create sprite from image
+            function createSpriteFromImage(imgUrl, callback) {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
                 
-                // Draw image centered
-                const size = 512;
-                ctx.drawImage(img, 0, 0, size, size);
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 512;
+                    canvas.height = 512;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Draw image centered
+                    const size = 512;
+                    ctx.drawImage(img, 0, 0, size, size);
+                    
+                    const texture = new THREE.CanvasTexture(canvas);
+                    texture.needsUpdate = true;
+                    callback(texture);
+                };
                 
-                const texture = new THREE.CanvasTexture(canvas);
-                texture.needsUpdate = true;
-                callback(texture);
-            };
-            
-            img.onerror = function() {
-                // Fallback to colored square if image fails
-                const canvas = document.createElement('canvas');
-                canvas.width = 512;
-                canvas.height = 512;
-                const ctx = canvas.getContext('2d');
+                img.onerror = function() {
+                    // Fallback to colored square if image fails
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 512;
+                    canvas.height = 512;
+                    const ctx = canvas.getContext('2d');
+                    
+                    ctx.fillStyle = '#6C63FF';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 60px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('Loading...', 256, 256);
+                    
+                    const texture = new THREE.CanvasTexture(canvas);
+                    callback(texture);
+                };
                 
-                ctx.fillStyle = '#6C63FF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 60px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('Loading...', 256, 256);
-                
-                const texture = new THREE.CanvasTexture(canvas);
-                callback(texture);
-            };
-            
-            img.src = imgUrl;
-        }
-
-        // Create placeholder geometry - MAXIMUM SIZE
-        const placeholderGeometry = new THREE.PlaneGeometry(5.5, 5.5);
-        
-        techs.forEach((tech, i) => {
-            const phi = Math.acos(-1 + (2 * i) / techs.length);
-            const theta = Math.sqrt(techs.length * Math.PI) * phi;
-
-            // Create placeholder material
-            const placeholderMaterial = new THREE.MeshBasicMaterial({
-                color: 0x6C63FF,
-                transparent: true,
-                opacity: 0.8
-            });
-            
-            const sprite = new THREE.Mesh(placeholderGeometry, placeholderMaterial);
-            
-            sprite.position.x = radius * Math.sin(phi) * Math.cos(theta);
-            sprite.position.y = radius * Math.sin(phi) * Math.sin(theta);
-            sprite.position.z = radius * Math.cos(phi);
-            
-            sprite.lookAt(0, 0, 0);
-            
-            scene.add(sprite);
-            objects.push({ mesh: sprite, baseOpacity: 0.9 });
-            
-            // Load actual texture
-            createSpriteFromImage(tech.img, (texture) => {
-                sprite.material.map = texture;
-                sprite.material.color.setHex(0xffffff);
-                sprite.material.needsUpdate = true;
-            });
-        });
-
-        // Add ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
-
-        // Add pastel-colored point lights
-        const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
-        light1.position.set(10, 10, 10);
-        scene.add(light1);
-
-        const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
-        light2.position.set(-10, -10, 10);
-        scene.add(light2);
-
-        const light3 = new THREE.PointLight(0xFFB6C1, 0.5, 100);
-        light3.position.set(0, -10, -10);
-        scene.add(light3);
-
-        // Mouse interaction
-        let mouseX = 0;
-        let mouseY = 0;
-        let isMouseDown = false;
-
-        techSphere.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        techSphere.addEventListener('mousedown', () => {
-            isMouseDown = true;
-        });
-
-        document.addEventListener('mouseup', () => {
-            isMouseDown = false;
-        });
-
-        // Animation
-        function animateSphere() {
-            requestAnimationFrame(animateSphere);
-
-            if (isMouseDown) {
-                scene.rotation.y += mouseX * 0.05;
-                scene.rotation.x += mouseY * 0.05;
-            } else {
-                scene.rotation.y += 0.002;
-                scene.rotation.x += 0.001;
+                img.src = imgUrl;
             }
 
-            // Update opacity and scale based on position
-            objects.forEach(obj => {
-                const distance = obj.mesh.position.distanceTo(camera.position);
-                obj.mesh.material.opacity = 0.5 + (1 - distance / 25) * 0.5;
+            // Create placeholder geometry - BALANCED SIZE
+            const placeholderGeometry = new THREE.PlaneGeometry(4, 4);
+            
+            techs.forEach((tech, i) => {
+                const phi = Math.acos(-1 + (2 * i) / techs.length);
+                const theta = Math.sqrt(techs.length * Math.PI) * phi;
+
+                // Create placeholder material
+                const placeholderMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x6C63FF,
+                    transparent: true,
+                    opacity: 0.8
+                });
                 
-                // Subtle scale effect based on distance
-                const scale = 0.8 + (1 - distance / 25) * 0.3;
-                obj.mesh.scale.set(scale, scale, scale);
+                const sprite = new THREE.Mesh(placeholderGeometry, placeholderMaterial);
+                
+                sprite.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                sprite.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                sprite.position.z = radius * Math.cos(phi);
+                
+                sprite.lookAt(0, 0, 0);
+                
+                scene.add(sprite);
+                objects.push({ mesh: sprite, baseOpacity: 0.9 });
+                
+                // Load actual texture
+                createSpriteFromImage(tech.img, (texture) => {
+                    sprite.material.map = texture;
+                    sprite.material.color.setHex(0xffffff);
+                    sprite.material.needsUpdate = true;
+                });
             });
 
-            renderer.render(scene, camera);
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            // Add pastel-colored point lights
+            const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
+            light1.position.set(10, 10, 10);
+            scene.add(light1);
+
+            const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
+            light2.position.set(-10, -10, 10);
+            scene.add(light2);
+
+            const light3 = new THREE.PointLight(0xFFB6C1, 0.5, 100);
+            light3.position.set(0, -10, -10);
+            scene.add(light3);
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let isMouseDown = false;
+
+            techSphere.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            techSphere.addEventListener('mousedown', () => {
+                isMouseDown = true;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isMouseDown = false;
+            });
+
+            // Animation
+            function animateSphere() {
+                requestAnimationFrame(animateSphere);
+
+                if (isMouseDown) {
+                    scene.rotation.y += mouseX * 0.05;
+                    scene.rotation.x += mouseY * 0.05;
+                } else {
+                    scene.rotation.y += 0.002;
+                    scene.rotation.x += 0.001;
+                }
+
+                // Update opacity and scale based on position
+                objects.forEach(obj => {
+                    const distance = obj.mesh.position.distanceTo(camera.position);
+                    obj.mesh.material.opacity = 0.5 + (1 - distance / 25) * 0.5;
+                    
+                    // Subtle scale effect based on distance
+                    const scale = 0.8 + (1 - distance / 25) * 0.3;
+                    obj.mesh.scale.set(scale, scale, scale);
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animateSphere();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = techSphere.clientWidth / techSphere.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+            });
+        } catch (error) {
+            console.error('3D Sphere Error:', error);
         }
-
-        animateSphere();
-
-        // Handle resize
-        window.addEventListener('resize', () => {
-            camera.aspect = techSphere.clientWidth / techSphere.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
-        });
 
         // Particle animation
         const canvas = document.getElementById('particles-canvas');
