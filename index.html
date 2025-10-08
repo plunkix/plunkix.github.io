@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,17 +18,20 @@
         }
 
         :root {
-            --rich-purple: #6C63FF;
-            --electric-blue: #00D9FF;
-            --neon-green: #39FF14;
-            --dark-bg: #0D0D0D;
-            --card-bg: rgba(108, 99, 255, 0.1);
+            --pastel-purple: #B4A7D6;
+            --pastel-blue: #A8D8EA;
+            --pastel-pink: #FFB6C1;
+            --pastel-mint: #AEDCC0;
+            --pastel-peach: #FFD4B2;
+            --dark-bg: #1A1625;
+            --darker-bg: #0F0B1A;
+            --card-bg: rgba(180, 167, 214, 0.08);
             --text-light: #E8E8F0;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--dark-bg);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #2D1B3D 100%);
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
@@ -37,7 +45,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         /* Navigation */
@@ -46,12 +54,12 @@
             top: 0;
             width: 100%;
             padding: 1.5rem 2rem;
-            background: rgba(13, 13, 13, 0.9);
+            background: rgba(26, 22, 37, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
             transform: translateY(-100%);
             transition: transform 0.3s ease;
-            border-bottom: 1px solid rgba(108, 99, 255, 0.3);
+            border-bottom: 1px solid rgba(180, 167, 214, 0.3);
         }
 
         nav.visible {
@@ -82,12 +90,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--electric-blue);
+            background: var(--pastel-blue);
             transition: width 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
         }
 
         nav a:hover::after {
@@ -119,7 +127,7 @@
             font-size: 5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--rich-purple), var(--electric-blue), var(--neon-green));
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue), var(--pastel-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -128,7 +136,7 @@
 
         .hero-content .tagline {
             font-size: 1.5rem;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
             margin-bottom: 2rem;
             font-weight: 300;
             animation: fadeInUp 1.2s ease;
@@ -145,12 +153,12 @@
         .scroll-indicator::before {
             content: '↓';
             font-size: 2rem;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
         }
 
         /* About Section */
         #about {
-            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(108, 99, 255, 0.05) 100%);
+            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
         }
 
         .section-title {
@@ -158,7 +166,7 @@
             font-weight: 700;
             margin-bottom: 3rem;
             text-align: center;
-            background: linear-gradient(135deg, var(--rich-purple), var(--electric-blue));
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -182,14 +190,14 @@
         }
 
         .highlight {
-            color: var(--neon-green);
+            color: var(--pastel-mint);
             font-weight: 600;
         }
 
         /* 3D Tech Stack Sphere */
         #tech-sphere {
             width: 100%;
-            height: 500px;
+            height: 650px;
             margin: 2rem auto;
             cursor: grab;
         }
@@ -209,7 +217,7 @@
         }
 
         .projects-header p {
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
             font-size: 1.1rem;
             margin-top: 0.5rem;
         }
@@ -225,7 +233,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2.5rem;
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(180, 167, 214, 0.3);
             transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(50px);
@@ -240,7 +248,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--rich-purple), var(--electric-blue), var(--neon-green));
+            background: linear-gradient(90deg, var(--pastel-purple), var(--pastel-blue), var(--pastel-pink));
         }
 
         .project-card.visible {
@@ -249,8 +257,8 @@
         }
 
         .project-card:hover {
-            border-color: var(--electric-blue);
-            box-shadow: 0 20px 60px rgba(108, 99, 255, 0.3);
+            border-color: var(--pastel-blue);
+            box-shadow: 0 20px 60px rgba(180, 167, 214, 0.3);
             transform: translateY(-10px);
         }
 
@@ -264,12 +272,12 @@
         .project-title {
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
             margin-bottom: 0.5rem;
         }
 
         .project-badge {
-            background: linear-gradient(135deg, var(--neon-green), #00FF88);
+            background: linear-gradient(135deg, var(--pastel-mint), var(--pastel-peach));
             color: var(--dark-bg);
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
@@ -279,7 +287,7 @@
         }
 
         .project-subtitle {
-            color: var(--neon-green);
+            color: var(--pastel-pink);
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -308,7 +316,7 @@
         .metric-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
             display: block;
             margin-bottom: 0.2rem;
         }
@@ -349,7 +357,7 @@
             content: '▹';
             position: absolute;
             left: 0;
-            color: var(--neon-green);
+            color: var(--pastel-mint);
             font-weight: bold;
             font-size: 1.3rem;
         }
@@ -361,12 +369,12 @@
         }
 
         .tag {
-            background: rgba(0, 217, 255, 0.15);
-            color: var(--electric-blue);
+            background: rgba(168, 216, 234, 0.15);
+            color: var(--pastel-blue);
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            border: 1px solid rgba(0, 217, 255, 0.3);
+            border: 1px solid rgba(168, 216, 234, 0.3);
             font-weight: 500;
         }
 
@@ -378,7 +386,7 @@
 
         .other-projects-header h3 {
             font-size: 2rem;
-            color: var(--rich-purple);
+            color: var(--pastel-purple);
             margin-bottom: 0.5rem;
         }
 
@@ -393,24 +401,24 @@
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(180, 167, 214, 0.3);
             transition: all 0.3s ease;
         }
 
         .other-project-card:hover {
-            border-color: var(--rich-purple);
+            border-color: var(--pastel-purple);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(180, 167, 214, 0.2);
         }
 
         .other-project-card h4 {
             font-size: 1.5rem;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
             margin-bottom: 0.8rem;
         }
 
         .other-project-card .subtitle {
-            color: var(--neon-green);
+            color: var(--pastel-pink);
             font-size: 0.95rem;
             margin-bottom: 1rem;
             font-weight: 500;
@@ -424,7 +432,7 @@
 
         /* Blog Section */
         #blog {
-            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(108, 99, 255, 0.05) 100%);
+            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
         }
 
         .blog-grid {
@@ -439,17 +447,17 @@
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
-            border: 1px solid rgba(108, 99, 255, 0.3);
+            border: 1px solid rgba(180, 167, 214, 0.3);
             transition: all 0.3s ease;
         }
 
         .blog-card:hover {
             transform: translateY(-5px);
-            border-color: var(--electric-blue);
+            border-color: var(--pastel-blue);
         }
 
         .blog-date {
-            color: var(--neon-green);
+            color: var(--pastel-mint);
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
             font-weight: 600;
@@ -459,7 +467,7 @@
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
         }
 
         /* Connect Section */
@@ -496,22 +504,22 @@
             transform: scale(1.2) rotate(5deg);
             filter: grayscale(0%) brightness(1) invert(0);
             opacity: 1;
-            filter: drop-shadow(0 10px 30px rgba(108, 99, 255, 0.6));
+            filter: drop-shadow(0 10px 30px rgba(180, 167, 214, 0.6));
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            background: rgba(13, 13, 13, 0.8);
-            border-top: 1px solid rgba(108, 99, 255, 0.3);
+            background: rgba(26, 22, 37, 0.8);
+            border-top: 1px solid rgba(180, 167, 214, 0.3);
             font-size: 0.95rem;
             color: var(--text-light);
             opacity: 0.8;
         }
 
         footer span {
-            color: var(--electric-blue);
+            color: var(--pastel-blue);
         }
 
         /* Animations */
@@ -637,7 +645,7 @@
                     <!-- Video Demo -->
                     <div class="project-video">
                         <iframe 
-                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" 
+                            src="https://www.youtube.com/embed/ND4zWlc05s0" 
                             title="GermiNet Demo" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
@@ -815,7 +823,7 @@
                 </p>
             </div>
             <div class="connect-links">
-                <a href="https://github.com/srushti" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/plunkix" target="_blank" rel="noopener noreferrer">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="connect-icon">
                 </a>
                 <a href="https://in.linkedin.com/in/plunkix30002" target="_blank" rel="noopener noreferrer">
@@ -827,7 +835,7 @@
                         <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-                <a href="https://twitter.com/srushti" target="_blank" rel="noopener noreferrer">
+                <a href="https://x.com/juiiyarr" target="_blank" rel="noopener noreferrer">
                     <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
@@ -866,7 +874,7 @@
         ];
 
         const objects = [];
-        const radius = 8;
+        const radius = 9; // Increased radius for better spacing
 
         // Function to create sprite from image
         function createSpriteFromImage(imgUrl, callback) {
@@ -911,8 +919,8 @@
             img.src = imgUrl;
         }
 
-        // Create placeholder geometry
-        const placeholderGeometry = new THREE.PlaneGeometry(2.5, 2.5);
+        // Create placeholder geometry - MAXIMUM SIZE
+        const placeholderGeometry = new THREE.PlaneGeometry(5.5, 5.5);
         
         techs.forEach((tech, i) => {
             const phi = Math.acos(-1 + (2 * i) / techs.length);
@@ -947,6 +955,19 @@
         // Add ambient light
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         scene.add(ambientLight);
+
+        // Add pastel-colored point lights
+        const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
+        light1.position.set(10, 10, 10);
+        scene.add(light1);
+
+        const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
+        light2.position.set(-10, -10, 10);
+        scene.add(light2);
+
+        const light3 = new THREE.PointLight(0xFFB6C1, 0.5, 100);
+        light3.position.set(0, -10, -10);
+        scene.add(light3);
 
         // Mouse interaction
         let mouseX = 0;
@@ -1016,7 +1037,9 @@
                 this.vx = (Math.random() - 0.5) * 0.6;
                 this.vy = (Math.random() - 0.5) * 0.6;
                 this.radius = Math.random() * 2 + 1;
-                this.color = Math.random() > 0.5 ? 'rgba(108, 99, 255, 0.6)' : 'rgba(0, 217, 255, 0.6)';
+                // Pastel colors for particles
+                const colors = ['rgba(180, 167, 214, 0.6)', 'rgba(168, 216, 234, 0.6)', 'rgba(255, 182, 193, 0.6)'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
             }
 
             update() {
