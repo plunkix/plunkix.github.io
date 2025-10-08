@@ -530,7 +530,7 @@
             }
 
             .hero-content .tagline {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .about-grid {
@@ -538,21 +538,186 @@
                 gap: 2rem;
             }
 
+            .about-text {
+                font-size: 1rem;
+            }
+
             #tech-sphere {
-                height: 400px;
+                height: 350px;
+            }
+
+            nav {
+                padding: 1rem;
             }
 
             nav ul {
-                gap: 1.5rem;
-                font-size: 0.9rem;
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
             }
 
             .section-title {
                 font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .project-description {
+                font-size: 0.95rem;
+            }
+
+            .project-video iframe {
+                height: 250px;
+            }
+
+            .project-metrics {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .metric {
+                min-width: 45%;
+            }
+
+            .metric-value {
+                font-size: 1.3rem;
+            }
+
+            .project-highlights li {
+                font-size: 0.9rem;
+                padding: 0.4rem 0 0.4rem 1.5rem;
+            }
+
+            .project-tags {
+                gap: 0.5rem;
+            }
+
+            .tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
             }
 
             .other-projects-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .other-projects-header h3 {
+                font-size: 1.6rem;
+            }
+
+            .other-project-card {
+                padding: 1.5rem;
+            }
+
+            .other-project-card h4 {
+                font-size: 1.3rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card {
+                padding: 1.5rem;
+            }
+
+            .blog-title {
+                font-size: 1.2rem;
+            }
+
+            .connect-content p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .connect-links {
+                gap: 1.5rem;
+            }
+
+            .connect-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            footer {
+                font-size: 0.85rem;
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+                padding: 0 0.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.3rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .project-badge {
+                align-self: flex-start;
+            }
+
+            .project-video iframe {
+                height: 200px;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+
+            .connect-icon {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            #tech-sphere {
+                height: 450px;
+            }
+
+            .other-projects-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
