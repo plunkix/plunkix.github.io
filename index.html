@@ -1,9 +1,4 @@
-constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.6;
-                this<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,7 +32,6 @@ constructor() {
             overflow-x: hidden;
         }
 
-        /* Particle Background */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -48,7 +42,6 @@ constructor() {
             opacity: 0.4;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -102,7 +95,6 @@ constructor() {
             width: 100%;
         }
 
-        /* Sections */
         section {
             position: relative;
             min-height: 100vh;
@@ -115,7 +107,6 @@ constructor() {
             margin: 0 auto;
         }
 
-        /* Hero Section */
         #hero {
             display: flex;
             align-items: center;
@@ -156,7 +147,6 @@ constructor() {
             color: var(--pastel-blue);
         }
 
-        /* About Section */
         #about {
             background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
         }
@@ -194,7 +184,6 @@ constructor() {
             font-weight: 600;
         }
 
-        /* 3D Tech Stack Sphere */
         #tech-sphere {
             width: 100%;
             height: 500px;
@@ -206,7 +195,6 @@ constructor() {
             cursor: grabbing;
         }
 
-        /* Projects Section */
         #projects {
             background: var(--dark-bg);
         }
@@ -300,7 +288,6 @@ constructor() {
             opacity: 0.9;
         }
 
-        /* Project Metrics */
         .project-metrics {
             display: flex;
             gap: 2rem;
@@ -327,7 +314,6 @@ constructor() {
             font-weight: 400;
         }
 
-        /* Video Container */
         .project-video {
             margin-bottom: 2rem;
             border-radius: 15px;
@@ -378,7 +364,6 @@ constructor() {
             font-weight: 500;
         }
 
-        /* Other Projects */
         .other-projects-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -430,7 +415,6 @@ constructor() {
             margin-bottom: 1.5rem;
         }
 
-        /* Blog Section */
         #blog {
             background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
         }
@@ -470,7 +454,6 @@ constructor() {
             color: var(--pastel-blue);
         }
 
-        /* Connect Section */
         #connect {
             background: var(--dark-bg);
             text-align: center;
@@ -507,7 +490,6 @@ constructor() {
             filter: drop-shadow(0 10px 30px rgba(180, 167, 214, 0.6));
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
@@ -522,7 +504,6 @@ constructor() {
             color: var(--pastel-blue);
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -543,7 +524,6 @@ constructor() {
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -590,7 +570,6 @@ constructor() {
         </ul>
     </nav>
 
-    <!-- HERO -->
     <section id="hero">
         <div class="hero-content">
             <h1>Srushti</h1>
@@ -599,7 +578,6 @@ constructor() {
         <div class="scroll-indicator"></div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -621,7 +599,6 @@ constructor() {
         </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects">
         <div class="container">
             <div class="projects-header">
@@ -629,10 +606,8 @@ constructor() {
                 <p>Building AI that makes an impact</p>
             </div>
 
-            <!-- FEATURED PROJECTS -->
             <div class="featured-projects">
                 
-                <!-- GermiNet -->
                 <div class="project-card">
                     <div class="project-header">
                         <div>
@@ -646,7 +621,6 @@ constructor() {
                         seed germination patterns with 95% accuracy.
                     </p>
                     
-                    <!-- Video Demo -->
                     <div class="project-video">
                         <iframe 
                             src="https://www.youtube.com/embed/ND4zWlc05s0" 
@@ -656,7 +630,6 @@ constructor() {
                         </iframe>
                     </div>
 
-                    <!-- Metrics -->
                     <div class="project-metrics">
                         <div class="metric">
                             <span class="metric-value" data-target="95">0</span>
@@ -690,7 +663,6 @@ constructor() {
                     </div>
                 </div>
 
-                <!-- GrainVue -->
                 <div class="project-card">
                     <div class="project-header">
                         <div>
@@ -704,7 +676,6 @@ constructor() {
                         in embedding space, achieving 97% accuracy.
                     </p>
 
-                    <!-- Metrics -->
                     <div class="project-metrics">
                         <div class="metric">
                             <span class="metric-value" data-target="97">0</span>
@@ -740,7 +711,6 @@ constructor() {
 
             </div>
 
-            <!-- OTHER PROJECTS -->
             <div class="other-projects-header">
                 <h3>Other Projects</h3>
             </div>
@@ -792,7 +762,6 @@ constructor() {
         </div>
     </section>
 
-    <!-- BLOG -->
     <section id="blog">
         <div class="container">
             <h2 class="section-title">Blog</h2>
@@ -816,7 +785,6 @@ constructor() {
         </div>
     </section>
 
-    <!-- CONNECT -->
     <section id="connect">
         <div class="container">
             <h2 class="section-title">Let's Connect</h2>
@@ -853,252 +821,80 @@ constructor() {
     </footer>
 
     <script>
-        // 3D Tech Stack Sphere
-        try {
-            const techSphere = document.getElementById('tech-sphere');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, techSphere.clientWidth / techSphere.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
-            techSphere.appendChild(renderer.domElement);
+        // Particle animation - COMPLETE AND CLEAN
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-            camera.position.z = 15;
+            const particles = [];
+            const particleCount = 100;
 
-            // Tech stack icons - using your GitHub assets
-            const baseURL = 'https://ifelsecry.xyz/assets/';
-            const techs = [
-                { name: 'PyTorch', img: baseURL + 'pytorch.png' },
-                { name: 'TensorFlow', img: baseURL + 'tensorflow.png' },
-                { name: 'OpenCV', img: baseURL + 'opencv.png' },
-                { name: 'Python', img: baseURL + 'python.png' },
-                { name: 'Docker', img: baseURL + 'docker.png' },
-                { name: 'NumPy', img: baseURL + 'numpy.png' },
-                { name: 'Pandas', img: baseURL + 'pandas.png' },
-                { name: 'Jupyter', img: baseURL + 'jupyter.png' }
-            ];
-
-            const objects = [];
-            const radius = 8.5; // Balanced radius
-
-            // Function to create sprite from image
-            function createSpriteFromImage(imgUrl, callback) {
-                const img = new Image();
-                img.crossOrigin = 'anonymous';
-                
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 512;
-                    canvas.height = 512;
-                    const ctx = canvas.getContext('2d');
-                    
-                    // Draw image centered
-                    const size = 512;
-                    ctx.drawImage(img, 0, 0, size, size);
-                    
-                    const texture = new THREE.CanvasTexture(canvas);
-                    texture.needsUpdate = true;
-                    callback(texture);
-                };
-                
-                img.onerror = function() {
-                    // Fallback to colored square if image fails
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 512;
-                    canvas.height = 512;
-                    const ctx = canvas.getContext('2d');
-                    
-                    ctx.fillStyle = '#6C63FF';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    ctx.fillStyle = '#ffffff';
-                    ctx.font = 'bold 60px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText('Loading...', 256, 256);
-                    
-                    const texture = new THREE.CanvasTexture(canvas);
-                    callback(texture);
-                };
-                
-                img.src = imgUrl;
-            }
-
-            // Create placeholder geometry - BALANCED SIZE
-            const placeholderGeometry = new THREE.PlaneGeometry(4, 4);
-            
-            techs.forEach((tech, i) => {
-                const phi = Math.acos(-1 + (2 * i) / techs.length);
-                const theta = Math.sqrt(techs.length * Math.PI) * phi;
-
-                // Create placeholder material
-                const placeholderMaterial = new THREE.MeshBasicMaterial({
-                    color: 0x6C63FF,
-                    transparent: true,
-                    opacity: 0.8
-                });
-                
-                const sprite = new THREE.Mesh(placeholderGeometry, placeholderMaterial);
-                
-                sprite.position.x = radius * Math.sin(phi) * Math.cos(theta);
-                sprite.position.y = radius * Math.sin(phi) * Math.sin(theta);
-                sprite.position.z = radius * Math.cos(phi);
-                
-                sprite.lookAt(0, 0, 0);
-                
-                scene.add(sprite);
-                objects.push({ mesh: sprite, baseOpacity: 0.9 });
-                
-                // Load actual texture
-                createSpriteFromImage(tech.img, (texture) => {
-                    sprite.material.map = texture;
-                    sprite.material.color.setHex(0xffffff);
-                    sprite.material.needsUpdate = true;
-                });
-            });
-
-            // Add ambient light
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-            scene.add(ambientLight);
-
-            // Add pastel-colored point lights
-            const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
-            light1.position.set(10, 10, 10);
-            scene.add(light1);
-
-            const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
-            light2.position.set(-10, -10, 10);
-            scene.add(light2);
-
-            const light3 = new THREE.PointLight(0xFFB6C1, 0.5, 100);
-            light3.position.set(0, -10, -10);
-            scene.add(light3);
-
-            // Mouse interaction
-            let mouseX = 0;
-            let mouseY = 0;
-            let isMouseDown = false;
-
-            techSphere.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-            });
-
-            techSphere.addEventListener('mousedown', () => {
-                isMouseDown = true;
-            });
-
-            document.addEventListener('mouseup', () => {
-                isMouseDown = false;
-            });
-
-            // Animation
-            function animateSphere() {
-                requestAnimationFrame(animateSphere);
-
-                if (isMouseDown) {
-                    scene.rotation.y += mouseX * 0.05;
-                    scene.rotation.x += mouseY * 0.05;
-                } else {
-                    scene.rotation.y += 0.002;
-                    scene.rotation.x += 0.001;
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.5) * 0.6;
+                    this.radius = Math.random() * 2 + 1;
+                    const colors = ['rgba(180, 167, 214, 0.6)', 'rgba(168, 216, 234, 0.6)', 'rgba(255, 182, 193, 0.6)'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
                 }
 
-                // Update opacity and scale based on position
-                objects.forEach(obj => {
-                    const distance = obj.mesh.position.distanceTo(camera.position);
-                    obj.mesh.material.opacity = 0.5 + (1 - distance / 25) * 0.5;
-                    
-                    // Subtle scale effect based on distance
-                    const scale = 0.8 + (1 - distance / 25) * 0.3;
-                    obj.mesh.scale.set(scale, scale, scale);
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
                 });
 
-                renderer.render(scene, camera);
-            }
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
 
-            animateSphere();
-
-            // Handle resize
-            window.addEventListener('resize', () => {
-                camera.aspect = techSphere.clientWidth / techSphere.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
-            });
-        } catch (error) {
-            console.error('3D Sphere Error:', error);
-        }
-
-        // Particle animation
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-        const particleCount = 100;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.6;
-                this.radius = Math.random() * 2 + 1;
-                // Pastel colors for particles
-                const colors = ['rgba(180, 167, 214, 0.6)', 'rgba(168, 216, 234, 0.6)', 'rgba(255, 182, 193, 0.6)'];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            // Draw connections
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(108, 99, 255, ${0.15 - distance / 800})`;
-                        ctx.stroke();
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(180, 167, 214, ${0.2 - distance / 750})`;
+                            ctx.stroke();
+                        }
                     }
                 }
+
+                requestAnimationFrame(animate);
             }
 
-            requestAnimationFrame(animate);
-        }
+            animate();
 
-        animate();
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        })();
 
         // Navbar show on scroll
         const navbar = document.getElementById('navbar');
@@ -1115,7 +911,9 @@ constructor() {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
@@ -1140,8 +938,8 @@ constructor() {
         // Animated metrics counter
         function animateCounter(element) {
             const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const increment = target / (duration / 16); // 60fps
+            const duration = 2000;
+            const increment = target / (duration / 16);
             let current = 0;
 
             const updateCounter = () => {
@@ -1157,7 +955,6 @@ constructor() {
             updateCounter();
         }
 
-        // Trigger counter animation when metrics come into view
         const metricsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1176,11 +973,161 @@ constructor() {
             metricsObserver.observe(metrics);
         });
 
-        // Resize canvas
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        // 3D Tech Stack Sphere
+        (function() {
+            try {
+                if (typeof THREE === 'undefined') {
+                    console.error('THREE.js not loaded');
+                    return;
+                }
+
+                const techSphere = document.getElementById('tech-sphere');
+                if (!techSphere) return;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, techSphere.clientWidth / techSphere.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                
+                renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+                techSphere.appendChild(renderer.domElement);
+
+                camera.position.z = 15;
+
+                const baseURL = 'https://ifelsecry.xyz/assets/';
+                const techs = [
+                    { name: 'PyTorch', img: baseURL + 'pytorch.png' },
+                    { name: 'TensorFlow', img: baseURL + 'tensorflow.png' },
+                    { name: 'OpenCV', img: baseURL + 'opencv.png' },
+                    { name: 'Python', img: baseURL + 'python.png' },
+                    { name: 'Docker', img: baseURL + 'docker.png' },
+                    { name: 'NumPy', img: baseURL + 'numpy.png' },
+                    { name: 'Pandas', img: baseURL + 'pandas.png' },
+                    { name: 'Jupyter', img: baseURL + 'jupyter.png' }
+                ];
+
+                const objects = [];
+                const radius = 8.5;
+
+                function createSpriteFromImage(imgUrl, callback) {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 512;
+                        canvas.height = 512;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, 512, 512);
+                        const texture = new THREE.CanvasTexture(canvas);
+                        texture.needsUpdate = true;
+                        callback(texture);
+                    };
+                    
+                    img.onerror = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 512;
+                        canvas.height = 512;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#B4A7D6';
+                        ctx.fillRect(0, 0, 512, 512);
+                        const texture = new THREE.CanvasTexture(canvas);
+                        callback(texture);
+                    };
+                    
+                    img.src = imgUrl;
+                }
+
+                const placeholderGeometry = new THREE.PlaneGeometry(4, 4);
+                
+                techs.forEach((tech, i) => {
+                    const phi = Math.acos(-1 + (2 * i) / techs.length);
+                    const theta = Math.sqrt(techs.length * Math.PI) * phi;
+
+                    const placeholderMaterial = new THREE.MeshBasicMaterial({
+                        color: 0xB4A7D6,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+                    
+                    const sprite = new THREE.Mesh(placeholderGeometry, placeholderMaterial);
+                    
+                    sprite.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                    sprite.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                    sprite.position.z = radius * Math.cos(phi);
+                    
+                    sprite.lookAt(0, 0, 0);
+                    
+                    scene.add(sprite);
+                    objects.push({ mesh: sprite });
+                    
+                    createSpriteFromImage(tech.img, (texture) => {
+                        sprite.material.map = texture;
+                        sprite.material.color.setHex(0xffffff);
+                        sprite.material.opacity = 0.9;
+                        sprite.material.needsUpdate = true;
+                    });
+                });
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+                scene.add(ambientLight);
+
+                const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
+                light1.position.set(10, 10, 10);
+                scene.add(light1);
+
+                const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
+                light2.position.set(-10, -10, 10);
+                scene.add(light2);
+
+                let mouseX = 0;
+                let mouseY = 0;
+                let isMouseDown = false;
+
+                techSphere.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                });
+
+                techSphere.addEventListener('mousedown', () => {
+                    isMouseDown = true;
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                });
+
+                function animateSphere() {
+                    requestAnimationFrame(animateSphere);
+
+                    if (isMouseDown) {
+                        scene.rotation.y += mouseX * 0.05;
+                        scene.rotation.x += mouseY * 0.05;
+                    } else {
+                        scene.rotation.y += 0.002;
+                        scene.rotation.x += 0.001;
+                    }
+
+                    objects.forEach(obj => {
+                        const distance = obj.mesh.position.distanceTo(camera.position);
+                        obj.mesh.material.opacity = 0.5 + (1 - distance / 25) * 0.5;
+                        const scale = 0.8 + (1 - distance / 25) * 0.3;
+                        obj.mesh.scale.set(scale, scale, scale);
+                    });
+
+                    renderer.render(scene, camera);
+                }
+
+                animateSphere();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = techSphere.clientWidth / techSphere.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+                });
+            } catch (error) {
+                console.error('3D Sphere Error:', error);
+            }
+        })();
     </script>
 </body>
 </html>
