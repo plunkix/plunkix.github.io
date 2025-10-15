@@ -1,14 +1,215 @@
-<div class="other-project-card">
-                    <h4>SpyderCare</h4>
-                    <p class="subtitle">AI Mental Health Chatbot</p>
-                    <p>
-                        Empathetic chatbot for students using NLP and sentiment analysis to provide 
-                        accessible mental health support.
-                    </p>
-                    <div class="project-links">
-                        <a href="https://github.com/plunkix/SpyderCare" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416        .featured-projects {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srushti - AI & ML Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-purple: #B4A7D6;
+            --pastel-blue: #A8D8EA;
+            --pastel-pink: #FFB6C1;
+            --pastel-mint: #AEDCC0;
+            --pastel-peach: #FFD4B2;
+            --dark-bg: #1A1625;
+            --darker-bg: #0F0B1A;
+            --card-bg: rgba(180, 167, 214, 0.08);
+            --text-light: #E8E8F0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #2D1B3D 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(26, 22, 37, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            border-bottom: 1px solid rgba(180, 167, 214, 0.3);
+        }
+
+        nav.visible {
+            transform: translateY(0);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pastel-blue);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--pastel-blue);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            position: relative;
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue), var(--pastel-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.3rem;
+            color: var(--pastel-blue);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--pastel-blue);
+        }
+
+        #about {
+            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            color: var(--pastel-mint);
+            font-weight: 600;
+        }
+
+        #tech-sphere {
+            width: 100%;
+            height: 500px;
+            margin: 2rem auto;
+            cursor: grab;
+        }
+
+        #tech-sphere:active {
+            cursor: grabbing;
+        }
+      #projects {
+            background: var(--dark-bg);
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .projects-header p {
+            color: var(--pastel-blue);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .featured-projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 2rem;
@@ -29,3 +230,1105 @@
             display: flex;
             flex-direction: column;
         }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pastel-purple), var(--pastel-blue), var(--pastel-pink));
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            border-color: var(--pastel-blue);
+            box-shadow: 0 20px 60px rgba(180, 167, 214, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pastel-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-badge {
+            background: linear-gradient(135deg, var(--pastel-mint), var(--pastel-peach));
+            color: var(--dark-bg);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .project-subtitle {
+            color: var(--pastel-pink);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(168, 216, 234, 0.15);
+            border: 1px solid rgba(168, 216, 234, 0.4);
+            border-radius: 8px;
+            color: var(--pastel-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-link-btn:hover {
+            background: rgba(168, 216, 234, 0.25);
+            border-color: var(--pastel-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(168, 216, 234, 0.3);
+        }
+
+        .project-link-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .project-link-btn.demo {
+            background: rgba(180, 167, 214, 0.15);
+            border-color: rgba(180, 167, 214, 0.4);
+            color: var(--pastel-purple);
+        }
+
+        .project-link-btn.demo:hover {
+            background: rgba(180, 167, 214, 0.25);
+            border-color: var(--pastel-purple);
+            box-shadow: 0 5px 15px rgba(180, 167, 214, 0.3);
+        }
+
+        .project-link-btn.blog {
+            background: rgba(255, 182, 193, 0.15);
+            border-color: rgba(255, 182, 193, 0.4);
+            color: var(--pastel-pink);
+        }
+
+        .project-link-btn.blog:hover {
+            background: rgba(255, 182, 193, 0.25);
+            border-color: var(--pastel-pink);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+
+      .other-projects-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .other-projects-header h3 {
+            font-size: 2rem;
+            color: var(--pastel-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .other-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .other-project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(180, 167, 214, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .other-project-card:hover {
+            border-color: var(--pastel-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(180, 167, 214, 0.2);
+        }
+
+        .other-project-card h4 {
+            font-size: 1.5rem;
+            color: var(--pastel-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .other-project-card .subtitle {
+            color: var(--pastel-pink);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .other-project-card p {
+            opacity: 0.85;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        #blog {
+            background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(180, 167, 214, 0.05) 100%);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(180, 167, 214, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--pastel-blue);
+        }
+
+        .blog-date {
+            color: var(--pastel-mint);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--pastel-blue);
+        }
+
+        #connect {
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .connect-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .connect-links {
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .connect-icon {
+            width: 60px;
+            height: 60px;
+            transition: all 0.3s ease;
+            filter: grayscale(100%) brightness(0) invert(1);
+            opacity: 0.7;
+        }
+
+        .connect-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+            filter: grayscale(0%) brightness(1) invert(0);
+            opacity: 1;
+            filter: drop-shadow(0 10px 30px rgba(180, 167, 214, 0.6));
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(26, 22, 37, 0.8);
+            border-top: 1px solid rgba(180, 167, 214, 0.3);
+            font-size: 0.95rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        footer span {
+            color: var(--pastel-blue);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            #tech-sphere {
+                height: 350px;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .featured-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .project-description {
+                font-size: 0.95rem;
+            }
+
+            .project-video iframe {
+                height: 250px;
+            }
+
+            .project-metrics {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .metric {
+                min-width: 45%;
+            }
+
+            .metric-value {
+                font-size: 1.3rem;
+            }
+
+            .project-highlights li {
+                font-size: 0.9rem;
+                padding: 0.4rem 0 0.4rem 1.5rem;
+            }
+
+            .project-tags {
+                gap: 0.5rem;
+            }
+
+            .tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .other-projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .other-projects-header h3 {
+                font-size: 1.6rem;
+            }
+
+            .other-project-card {
+                padding: 1.5rem;
+            }
+
+            .other-project-card h4 {
+                font-size: 1.3rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card {
+                padding: 1.5rem;
+            }
+
+            .blog-title {
+                font-size: 1.2rem;
+            }
+
+            .connect-content p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .connect-links {
+                gap: 1.5rem;
+            }
+
+            .connect-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            footer {
+                font-size: 0.85rem;
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+                padding: 0 0.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.3rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .project-badge {
+                align-self: flex-start;
+            }
+
+            .project-video iframe {
+                height: 200px;
+            }
+
+            .metric {
+                min-width: 100%;
+            }
+
+            .connect-icon {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            #tech-sphere {
+                height: 450px;
+            }
+
+            .other-projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#connect">Connect</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Srushti</h1>
+            <p class="tagline">Machine Learning Engineer • AI Researcher • Bioinformatician</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I build intelligent systems that solve real-world problems. Currently focused on 
+                        <span class="highlight">computer vision and deep learning</span>, with applications 
+                        spanning agriculture, healthcare, and beyond.
+                    </p>
+                    <p>
+                        From training object detection models on complex datasets to implementing metric learning 
+                        pipelines for fine-grained classification, I specialize in turning messy data into 
+                        production-ready AI solutions.
+                    </p>
+                </div>
+            </div>
+            <div id="tech-sphere"></div>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="container">
+            <div class="projects-header">
+                <h2 class="section-title">Featured Work</h2>
+                <p>Building AI that makes an impact</p>
+            </div>
+
+            <div class="featured-projects">
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">GermiNet</h3>
+                            <p class="project-subtitle">Seed Germination Classification</p>
+                        </div>
+                        <span class="project-badge">Featured</span>
+                    </div>
+                    <p class="project-description">
+                        End-to-end object detection and segmentation pipeline using Mask R-CNN to analyze 
+                        seed germination patterns with 95% accuracy.
+                    </p>
+                    
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/GermiNet" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                    
+                    <div class="project-video">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ND4zWlc05s0" 
+                            title="GermiNet Demo" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value" data-target="95">0</span>
+                            <span class="metric-label">Accuracy %</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="98">0</span>
+                            <span class="metric-label">F1-Score %</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="1000">0</span>
+                            <span class="metric-label">Images</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="20">0</span>
+                            <span class="metric-label">Seeds/Image</span>
+                        </div>
+                    </div>
+
+                    <ul class="project-highlights">
+                        <li>Collected and annotated ~1,000 seed images with polygon masks</li>
+                        <li>Pipeline analyzes ~20 seeds per image simultaneously</li>
+                        <li>Achieved 95% accuracy and 98% F1-score</li>
+                        <li>Scalable architecture ready for deployment</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Mask R-CNN</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Object Detection</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">GrainVue</h3>
+                            <p class="project-subtitle">Fine-Grained Rice Variety Classification</p>
+                        </div>
+                        <span class="project-badge">Active</span>
+                    </div>
+                    <p class="project-description">
+                        Sophisticated rice classifier using metric learning to separate visually similar varieties 
+                        in embedding space, achieving 97% accuracy.
+                    </p>
+
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/GrainVue" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="#blog" class="project-link-btn blog">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Read Blog Post
+                        </a>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value" data-target="97">0</span>
+                            <span class="metric-label">Accuracy %</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="1500">0</span>
+                            <span class="metric-label">Images/Variety</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="5">0</span>
+                            <span class="metric-label">Varieties</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" data-target="128">0</span>
+                            <span class="metric-label">Embedding Dim</span>
+                        </div>
+                    </div>
+
+                    <ul class="project-highlights">
+                        <li>~1,500 images per variety across multiple rice types</li>
+                        <li>Fast R-CNN detector for seed localization and cropping</li>
+                        <li>Metric learning pipeline for embedding space separation</li>
+                        <li>Binary classifier (EfficientNet + ResNet) at 97% accuracy</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Fast R-CNN</span>
+                        <span class="tag">Metric Learning</span>
+                        <span class="tag">EfficientNet</span>
+                        <span class="tag">ResNet</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="other-projects-header">
+                <h3>Other Projects</h3>
+            </div>
+            <div class="other-projects-grid">
+                
+                <div class="other-project-card">
+                    <h4>SpyderCare</h4>
+                    <p class="subtitle">AI Mental Health Chatbot</p>
+                    <p>
+                        Empathetic chatbot for students using NLP and sentiment analysis to provide 
+                        accessible mental health support.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/SpyderCare" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://spydercare-demo.example.com" target="_blank" rel="noopener noreferrer" class="project-link-btn demo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                            </svg>
+                            Live Demo
+                        </a>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">NLP</span>
+                        <span class="tag">Chatbot</span>
+                        <span class="tag">Mental Health</span>
+                    </div>
+                </div>
+
+                <div class="other-project-card">
+                    <h4>Covid Coinfections Study</h4>
+                    <p class="subtitle">Viral Evolution Research</p>
+                    <p>
+                        Analyzing SARS-CoV-2 coinfections and viral evolution patterns using NGS data 
+                        and bioinformatics pipelines.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/covid-coinfections" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Genomics</span>
+                        <span class="tag">Bioinformatics</span>
+                        <span class="tag">NGS</span>
+                    </div>
+                </div>
+
+                <div class="other-project-card">
+                    <h4>Rice Genetic Diversity</h4>
+                    <p class="subtitle">SNP Analysis with TASSEL</p>
+                    <p>
+                        Computational analysis of genetic variations across rice varieties for agricultural 
+                        improvement insights.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/rice-genetic-diversity" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Genetics</span>
+                        <span class="tag">TASSEL</span>
+                        <span class="tag">SNP Analysis</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="blog">
+        <div class="container">
+            <h2 class="section-title">Blog</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <p class="blog-date">Coming Soon</p>
+                    <h3 class="blog-title">Building Annotation Pipelines at Scale</h3>
+                    <p>Lessons from annotating 1000+ images for computer vision models.</p>
+                </div>
+                <div class="blog-card">
+                    <p class="blog-date">Coming Soon</p>
+                    <h3 class="blog-title">Metric Learning in Practice</h3>
+                    <p>How embedding spaces solve fine-grained classification problems.</p>
+                </div>
+                <div class="blog-card">
+                    <p class="blog-date">Coming Soon</p>
+                    <h3 class="blog-title">From Research to Production</h3>
+                    <p>Deploying computer vision models in real-world environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="connect-content">
+                <p>
+                    Interested in collaborating or discussing AI/ML projects? 
+                    Always open to interesting conversations and opportunities.
+                </p>
+            </div>
+            <div class="connect-links">
+                <a href="https://github.com/plunkix" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="connect-icon">
+                </a>
+                <a href="https://in.linkedin.com/in/plunkix30002" target="_blank" rel="noopener noreferrer">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="connect-icon">
+                </a>
+                <a href="mailto:tathesrushti03@gmail.com">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/juiiyarr" target="_blank" rel="noopener noreferrer">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Created by <span>Srushti</span> © 2025</p>
+    </footer>
+    <script>
+        // Particle animation - COMPLETE AND CLEAN
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 100;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.5) * 0.6;
+                    this.radius = Math.random() * 2 + 1;
+                    const colors = ['rgba(180, 167, 214, 0.6)', 'rgba(168, 216, 234, 0.6)', 'rgba(255, 182, 193, 0.6)'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(180, 167, 214, ${0.2 - distance / 750})`;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        })();
+
+        // Navbar show on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll reveal for project cards
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Animated metrics counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+
+            updateCounter();
+        }
+
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const metrics = entry.target.querySelectorAll('.metric-value');
+                    metrics.forEach(metric => {
+                        if (metric.textContent === '0') {
+                            animateCounter(metric);
+                        }
+                    });
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.project-metrics').forEach(metrics => {
+            metricsObserver.observe(metrics);
+        });
+      // 3D Tech Stack Sphere
+        (function() {
+            try {
+                if (typeof THREE === 'undefined') {
+                    console.error('THREE.js not loaded');
+                    return;
+                }
+
+                const techSphere = document.getElementById('tech-sphere');
+                if (!techSphere) return;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, techSphere.clientWidth / techSphere.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                
+                renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+                techSphere.appendChild(renderer.domElement);
+
+                camera.position.z = 15;
+
+                const baseURL = 'https://ifelsecry.xyz/assets/';
+                const techs = [
+                    { name: 'PyTorch', img: baseURL + 'pytorch.png' },
+                    { name: 'TensorFlow', img: baseURL + 'tensorflow.png' },
+                    { name: 'OpenCV', img: baseURL + 'opencv.png' },
+                    { name: 'Python', img: baseURL + 'python.png' },
+                    { name: 'Docker', img: baseURL + 'docker.png' },
+                    { name: 'NumPy', img: baseURL + 'numpy.png' },
+                    { name: 'Pandas', img: baseURL + 'pandas.png' },
+                    { name: 'Jupyter', img: baseURL + 'jupyter.png' }
+                ];
+
+                const objects = [];
+                const radius = 8.5;
+
+                function createSpriteFromImage(imgUrl, callback) {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 512;
+                        canvas.height = 512;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, 512, 512);
+                        const texture = new THREE.CanvasTexture(canvas);
+                        texture.needsUpdate = true;
+                        callback(texture);
+                    };
+                    
+                    img.onerror = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 512;
+                        canvas.height = 512;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#B4A7D6';
+                        ctx.fillRect(0, 0, 512, 512);
+                        const texture = new THREE.CanvasTexture(canvas);
+                        callback(texture);
+                    };
+                    
+                    img.src = imgUrl;
+                }
+
+                const placeholderGeometry = new THREE.PlaneGeometry(4, 4);
+                
+                techs.forEach((tech, i) => {
+                    const phi = Math.acos(-1 + (2 * i) / techs.length);
+                    const theta = Math.sqrt(techs.length * Math.PI) * phi;
+
+                    const placeholderMaterial = new THREE.MeshBasicMaterial({
+                        color: 0xB4A7D6,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+                    
+                    const sprite = new THREE.Mesh(placeholderGeometry, placeholderMaterial);
+                    
+                    sprite.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                    sprite.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                    sprite.position.z = radius * Math.cos(phi);
+                    
+                    sprite.lookAt(0, 0, 0);
+                    
+                    scene.add(sprite);
+                    objects.push({ mesh: sprite });
+                    
+                    createSpriteFromImage(tech.img, (texture) => {
+                        sprite.material.map = texture;
+                        sprite.material.color.setHex(0xffffff);
+                        sprite.material.opacity = 0.9;
+                        sprite.material.needsUpdate = true;
+                    });
+                });
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+                scene.add(ambientLight);
+
+                const light1 = new THREE.PointLight(0xB4A7D6, 0.8, 100);
+                light1.position.set(10, 10, 10);
+                scene.add(light1);
+
+                const light2 = new THREE.PointLight(0xA8D8EA, 0.6, 100);
+                light2.position.set(-10, -10, 10);
+                scene.add(light2);
+
+                let mouseX = 0;
+                let mouseY = 0;
+                let isMouseDown = false;
+
+                techSphere.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                  function animateSphere() {
+                    requestAnimationFrame(animateSphere);
+
+                    if (isMouseDown) {
+                        scene.rotation.y += mouseX * 0.05;
+                        scene.rotation.x += mouseY * 0.05;
+                    } else {
+                        scene.rotation.y += 0.002;
+                        scene.rotation.x += 0.001;
+                    }
+
+                    objects.forEach(obj => {
+                        const distance = obj.mesh.position.distanceTo(camera.position);
+                        obj.mesh.material.opacity = 0.5 + (1 - distance / 25) * 0.5;
+                        const scale = 0.8 + (1 - distance / 25) * 0.3;
+                        obj.mesh.scale.set(scale, scale, scale);
+                    });
+
+                    renderer.render(scene, camera);
+                }
+
+                animateSphere();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = techSphere.clientWidth / techSphere.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(techSphere.clientWidth, techSphere.clientHeight);
+                });
+            } catch (error) {
+                console.error('3D Sphere Error:', error);
+            }
+        })();
+    </script>
+</body>
+</html>
