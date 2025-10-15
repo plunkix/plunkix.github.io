@@ -36,7 +36,9 @@
 
         @media (min-width: 769px) {
             .featured-projects {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
+                max-width: 900px;
+                margin: 0 auto 5rem;
             }
         }
 
@@ -925,9 +927,11 @@
                         <span class="tag">ResNet</span>
                     </div>
                 </div>
+
             <div class="other-projects-header">
                 <h3>Other Projects</h3>
             </div>
+
             <div class="other-projects-grid">
                 <div class="other-project-card">
                     <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
