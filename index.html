@@ -32,6 +32,54 @@
             transform: scale(1.15);
         }
 
+        /* Button-style project links */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, rgba(168, 216, 234, 0.2), rgba(180, 167, 214, 0.2));
+            border: 2px solid var(--pastel-blue);
+            border-radius: 25px;
+            color: var(--pastel-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-link:hover {
+            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(168, 216, 234, 0.4);
+            border-color: var(--pastel-blue);
+        }
+
+        .btn-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-link.primary {
+            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+            color: var(--dark-bg);
+            border-color: var(--pastel-purple);
+        }
+
+        .btn-link.primary:hover {
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink));
+            box-shadow: 0 10px 30px rgba(180, 167, 214, 0.5);
+        }
+
         /* Desktop layout for featured projects */
 
         @media (min-width: 769px) {
@@ -647,6 +695,20 @@
                 padding: 0.4rem 0.8rem;
             }
 
+            .btn-link {
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .btn-link svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .project-links {
+                gap: 0.8rem;
+            }
+
             .other-projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -774,7 +836,7 @@
     <section id="hero">
         <div class="hero-content">
             <h1>Srushti</h1>
-            <p class="tagline">Machine Learning Engineer • Computer Vision</p>
+            <p class="tagline">Machine Learning Engineer • Computer Vision • Genomics</p>
         </div>
         <div class="scroll-indicator"></div>
     </section>
@@ -785,14 +847,14 @@
             <div class="about-grid">
                 <div class="about-text">
                     <p>
-                        I build intelligent systems that solve real-world problems. Currently focused on 
-                        <span class="highlight">computer vision and deep learning</span>, with applications 
-                        spanning agriculture, healthcare, and beyond.
+                        I build intelligent systems that solve real-world problems. My work spans
+                        <span class="highlight">computer vision, deep learning, and computational genomics</span>,
+                        with applications in agriculture, healthcare, and biological research.
                     </p>
                     <p>
-                        From training object detection models on complex datasets to implementing metric learning 
-                        pipelines for fine-grained classification, I specialize in turning messy data into 
-                        production-ready AI solutions.
+                        From training object detection models on complex datasets to developing cloud-based genomics
+                        platforms, I specialize in turning messy data into production-ready solutions. My expertise
+                        includes metric learning pipelines, population structure analysis, and scalable ML architectures.
                     </p>
                 </div>
             </div>
@@ -810,32 +872,24 @@
             <div class="featured-projects">
                 
                 <div class="project-card">
-
                     <div class="project-header">
                         <div>
                             <h3 class="project-title">GermiNet</h3>
                             <p class="project-subtitle">Seed Germination Classification</p>
                         </div>
-                        <div style="display: flex; gap: 0.8rem; align-items: center;">
-                            <a href="https://github.com/plunkix/GermiNet" target="_blank" rel="noopener noreferrer" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                            </a>
-                            <span class="project-badge">Featured</span>
-                        </div>
+                        <span class="project-badge">Featured</span>
                     </div>
 
                     <p class="project-description">
-                        End-to-end object detection and segmentation pipeline using Mask R-CNN to analyze 
+                        End-to-end object detection and segmentation pipeline using Mask R-CNN to analyze
                         seed germination patterns with 95% accuracy.
                     </p>
-                    
+
                     <div class="project-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/ND4zWlc05s0" 
-                            title="GermiNet Demo" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        <iframe
+                            src="https://www.youtube.com/embed/ND4zWlc05s0"
+                            title="GermiNet Demo"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -871,6 +925,20 @@
                         <span class="tag">PyTorch</span>
                         <span class="tag">Object Detection</span>
                     </div>
+                    <div class="project-links">
+                        <a href="https://github.com/plunkix/GermiNet" target="_blank" rel="noopener noreferrer" class="btn-link primary">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=ND4zWlc05s0" target="_blank" rel="noopener noreferrer" class="btn-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Watch Demo
+                        </a>
+                    </div>
                 </div>
 
                 <div class="project-card">
@@ -879,21 +947,10 @@
                             <h3 class="project-title">GrainVue</h3>
                             <p class="project-subtitle">Fine-Grained Rice Variety Classification</p>
                         </div>
-                        <div style="display: flex; gap: 0.8rem; align-items: center;">
-                            <a href="https://www.notion.so/GrainVue-28cf445428328070b750fd552c00b9c0" target="_blank" rel="noopener noreferrer" class="project-link" title="Read Blog">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                    <polyline points="14 2 14 8 20 8"/>
-                                    <line x1="16" y1="13" x2="8" y2="13"/>
-                                    <line x1="16" y1="17" x2="8" y2="17"/>
-                                    <polyline points="10 9 9 9 8 9"/>
-                                </svg>
-                            </a>
-                            <span class="project-badge">Active</span>
-                        </div>
+                        <span class="project-badge">Active</span>
                     </div>
                     <p class="project-description">
-                        Sophisticated rice classifier using metric learning to separate visually similar varieties 
+                        Sophisticated rice classifier using metric learning to separate visually similar varieties
                         in embedding space, achieving 97% accuracy.
                     </p>
                     <div class="project-metrics">
@@ -926,25 +983,54 @@
                         <span class="tag">EfficientNet</span>
                         <span class="tag">ResNet</span>
                     </div>
+                    <div class="project-links">
+                        <a href="https://www.notion.so/GrainVue-28cf445428328070b750fd552c00b9c0" target="_blank" rel="noopener noreferrer" class="btn-link primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            Read Documentation
+                        </a>
+                    </div>
                 </div>
 
             <div class="other-projects-header">
-                <h3>Other Projects</h3>
+                <h3>Other Projects & Tools</h3>
             </div>
 
             <div class="other-projects-grid">
                 <div class="other-project-card">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
-                        <h4>SpyderCare</h4>
-                        <a href="https://spydercare.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-small" title="View Demo">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="5 3 19 12 5 21 5 3"/>
+                    <h4>PopStruct</h4>
+                    <p class="subtitle">Population Structure Analysis Platform</p>
+                    <p>
+                        Cloud-based genomics platform for analyzing genetic diversity using PCA, K-means clustering,
+                        and kinship analysis. Built for agricultural research and crop breeding programs.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Genomics</span>
+                        <span class="tag">Next.js</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">scikit-learn</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://popstruct-i3ab.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-link primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                             </svg>
+                            Launch App
                         </a>
                     </div>
+                </div>
+
+                <div class="other-project-card">
+                    <h4>SpyderCare</h4>
                     <p class="subtitle">AI Mental Health Chatbot</p>
                     <p>
-                        Empathetic chatbot for students using NLP and sentiment analysis to provide 
+                        Empathetic chatbot for students using NLP and sentiment analysis to provide
                         accessible mental health support.
                     </p>
                     <div class="project-tags">
@@ -952,20 +1038,21 @@
                         <span class="tag">Chatbot</span>
                         <span class="tag">Mental Health</span>
                     </div>
-                </div>
-                <div class="other-project-card">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
-                        <h4>Covid Coinfections Study</h4>
-                        <a href="https://economic-rayon-049.notion.site/Project-Report-128f44542832805cbfd7fc2f7299b9cc?pvs=74" target="_blank" rel="noopener noreferrer" class="project-link-small" title="Read Thesis">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
+                    <div class="project-links">
+                        <a href="https://spydercare.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-link primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
                             </svg>
+                            View Demo
                         </a>
                     </div>
+                </div>
+
+                <div class="other-project-card">
+                    <h4>Covid Coinfections Study</h4>
                     <p class="subtitle">Viral Evolution Research</p>
                     <p>
-                        Analyzing SARS-CoV-2 coinfections and viral evolution patterns using NGS data 
+                        Analyzing SARS-CoV-2 coinfections and viral evolution patterns using NGS data
                         and bioinformatics pipelines.
                     </p>
                     <div class="project-tags">
@@ -973,27 +1060,41 @@
                         <span class="tag">Bioinformatics</span>
                         <span class="tag">NGS</span>
                     </div>
-                </div>
-                
-                <div class="other-project-card">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.8rem;">
-                        <h4>Rice Genetic Diversity</h4>
-                        <a href="https://economic-rayon-049.notion.site/Project-Report-128f4454283280fc9e8be4f63972ca09" target="_blank" rel="noopener noreferrer" class="project-link-small" title="Read Thesis">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="project-links">
+                        <a href="https://economic-rayon-049.notion.site/Project-Report-128f44542832805cbfd7fc2f7299b9cc?pvs=74" target="_blank" rel="noopener noreferrer" class="btn-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                 <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
                             </svg>
+                            Read Thesis
                         </a>
                     </div>
+                </div>
+
+                <div class="other-project-card">
+                    <h4>Rice Genetic Diversity</h4>
                     <p class="subtitle">SNP Analysis with TASSEL</p>
                     <p>
-                        Computational analysis of genetic variations across rice varieties for agricultural 
+                        Computational analysis of genetic variations across rice varieties for agricultural
                         improvement insights.
                     </p>
                     <div class="project-tags">
                         <span class="tag">Genetics</span>
                         <span class="tag">TASSEL</span>
                         <span class="tag">SNP Analysis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://economic-rayon-049.notion.site/Project-Report-128f4454283280fc9e8be4f63972ca09" target="_blank" rel="noopener noreferrer" class="btn-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            Read Thesis
+                        </a>
                     </div>
                 </div>
             </div>
