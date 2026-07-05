@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, MotionValue } from 'framer-motion';
 
 // --- TYPESCRIPT INTERFACES ---
@@ -206,7 +206,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#F5F5F7] font-sans selection:bg-[#F5F5F7] selection:text-[#000000] overflow-x-hidden">
-      {/* Passed scrollYProgress into the updated Navigation */}
       <Navigation scrollYProgress={scrollYProgress} />
       <LivingNetwork scrollYProgress={scrollYProgress} />
 
@@ -218,23 +217,13 @@ export default function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: cinematicEase }}
-            className="space-y-6"
+            className="space-y-6 mt-16"
           >
-            {/* The Name / Hero (Toned Down Size) */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: cinematicEase }}
-              className="text-5xl md:text-7xl font-medium tracking-tight text-[#F5F5F7] mb-2 ml-1 md:ml-2"
-            >
-              Srushti Tathe
-            </motion.h1>
-
-            {/* The Kicker / Theme */}
-            <motion.h2 className="text-2xl md:text-4xl leading-tight tracking-[0.2em] font-medium text-[#86868B] ml-1 md:ml-2 mb-8 md:mb-12">
+            {/* The Kicker / Theme restored to full size */}
+            <h1 className="text-[3.5rem] md:text-[9rem] leading-[0.9] font-medium tracking-tighter text-[#F5F5F7]">
               BIOLOGY
               <motion.span 
-                className="block text-[#333333] font-light text-4xl md:text-6xl my-2 md:my-4 ml-2"
+                className="block text-[#333333] font-light text-5xl md:text-8xl my-2 md:my-6 ml-2 md:ml-4"
                 initial={{ rotate: -45, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 transition={{ duration: 2, delay: 0.5, ease: cinematicEase }}
@@ -242,7 +231,7 @@ export default function App() {
                 ×
               </motion.span>
               INTELLIGENCE
-            </motion.h2>
+            </h1>
             
             <div className="pt-8 md:pt-12 max-w-2xl">
               <motion.p 
@@ -320,7 +309,6 @@ export default function App() {
             <div className="md:col-span-8 space-y-16">
               {OBSESSIONS.map((item: Obsession, i: number) => (
                 <div key={i} className="group">
-                  {/* Updated labels to be brighter (#86868B) and larger (text-sm md:text-base) */}
                   <p className="text-[#86868B] text-sm md:text-base tracking-widest uppercase mb-3 font-medium">{item.label}</p>
                   <motion.p 
                     animate={{ opacity: [0.6, 1, 0.6] }}
