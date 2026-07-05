@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, MotionValue } from 'framer-motion';
 
 // --- TYPESCRIPT INTERFACES ---
@@ -119,19 +119,27 @@ const LivingNetwork = ({ scrollYProgress }: { scrollYProgress: MotionValue<numbe
   );
 };
 
-// 2. Navigation
-const Navigation = () => (
-  <nav className="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-    <div className="text-xl md:text-2xl font-medium tracking-tight text-[#F5F5F7]">
-      Srushti Tathe
-    </div>
-    <div className="flex gap-6 text-xs tracking-widest uppercase font-medium text-[#86868B]">
-      <a href="#experiments" className="hover:text-[#F5F5F7] transition-colors">Work</a>
-      <a href="#timeline" className="hover:text-[#F5F5F7] transition-colors">Trajectory</a>
-      <a href="#contact" className="hover:text-[#F5F5F7] transition-colors">Contact</a>
-    </div>
-  </nav>
-);
+// 2. Navigation with Dynamic Scroll Sizing
+const Navigation = ({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) => {
+  // Scale the name from 1.5x down to 1x as the user scrolls the first 10% of the page
+  const nameScale = useTransform(scrollYProgress, [0, 0.1], [1.5, 1]);
+  
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <motion.div 
+        style={{ scale: nameScale, transformOrigin: "left center" }}
+        className="text-xl md:text-2xl font-medium tracking-tight text-[#F5F5F7]"
+      >
+        Srushti Tathe
+      </motion.div>
+      <div className="flex gap-6 text-xs tracking-widest uppercase font-medium text-[#86868B]">
+        <a href="#experiments" className="hover:text-[#F5F5F7] transition-colors">Work</a>
+        <a href="#timeline" className="hover:text-[#F5F5F7] transition-colors">Trajectory</a>
+        <a href="#contact" className="hover:text-[#F5F5F7] transition-colors">Contact</a>
+      </div>
+    </nav>
+  );
+};
 
 // 3. Experiment Block with Subtle Terminal Hover
 const ExperimentBlock = ({ exp }: { exp: Experiment }) => {
@@ -198,7 +206,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#F5F5F7] font-sans selection:bg-[#F5F5F7] selection:text-[#000000] overflow-x-hidden">
-      <Navigation />
+      {/* Passed scrollYProgress into the updated Navigation */}
+      <Navigation scrollYProgress={scrollYProgress} />
       <LivingNetwork scrollYProgress={scrollYProgress} />
 
       <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 pt-32">
@@ -211,12 +220,12 @@ export default function App() {
             transition={{ duration: 1.5, ease: cinematicEase }}
             className="space-y-6"
           >
-            {/* The Name / Hero */}
+            {/* The Name / Hero (Toned Down Size) */}
             <motion.h1 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: cinematicEase }}
-              className="text-6xl md:text-8xl font-medium tracking-tight text-[#F5F5F7] mb-2 ml-1 md:ml-2"
+              className="text-5xl md:text-7xl font-medium tracking-tight text-[#F5F5F7] mb-2 ml-1 md:ml-2"
             >
               Srushti Tathe
             </motion.h1>
@@ -311,7 +320,8 @@ export default function App() {
             <div className="md:col-span-8 space-y-16">
               {OBSESSIONS.map((item: Obsession, i: number) => (
                 <div key={i} className="group">
-                  <p className="text-[#333333] text-xs tracking-widest uppercase mb-3">{item.label}</p>
+                  {/* Updated labels to be brighter (#86868B) and larger (text-sm md:text-base) */}
+                  <p className="text-[#86868B] text-sm md:text-base tracking-widest uppercase mb-3 font-medium">{item.label}</p>
                   <motion.p 
                     animate={{ opacity: [0.6, 1, 0.6] }}
                     transition={{ duration: 4, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
