@@ -1,382 +1,431 @@
-import { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, MotionValue } from 'framer-motion';
+import React from 'react';
 
-// --- TYPESCRIPT INTERFACES ---
-interface Link {
-  label: string;
-  url: string;
-}
-
-interface Experiment {
-  id: string;
-  title: string;
-  desc: string;
-  logs: string[];
-  links: Link[];
-}
-
-interface OtherExperiment {
-  title: string;
-  desc: string;
-  url: string;
-}
-
-interface Obsession {
-  label: string;
-  value: string;
-}
-
-interface TimelineItem {
-  year: string;
-  text: string;
-}
-
-// --- DATA FROM HTML ---
-const EXPERIMENTS: Experiment[] = [
+const SKILLS = [
   {
-    id: "01",
-    title: "GermiNet",
-    desc: "End-to-end object detection pipeline using Mask R-CNN to analyze seed germination patterns. ~1,000 annotated images.",
-    logs: [
-      "> loading image dataset...",
-      "> extracting morphological features...",
-      "> initializing Mask R-CNN...",
-      "> classification complete. 95% accuracy."
-    ],
-    links: [
-      { label: "View GitHub", url: "https://github.com/plunkix/GermiNet" },
-      { label: "Watch Demo", url: "https://www.youtube.com/watch?v=ND4zWlc05s0" }
-    ]
+    category: 'Machine Learning & AI',
+    items: ['PyTorch', 'TensorFlow', 'Scikit-Learn', 'GPR', 'Mask R-CNN', 'Metric Learning'],
   },
   {
-    id: "02",
-    title: "GrainVue",
-    desc: "Fine-grained rice variety classification using embedding spaces and metric learning pipelines.",
-    logs: [
-      "> establishing embedding spaces...",
-      "> isolating visually similar varieties...",
-      "> training metric pipeline...",
-      "> separation achieved. 97% accuracy."
-    ],
-    links: [
-      { label: "Read Docs", url: "https://www.notion.so/GrainVue-28cf445428328070b750fd552c00b9c0" },
-      { label: "Watch Demo", url: "https://www.youtube.com/watch?v=7fRTHc1S9RU" }
-    ]
-  }
-];
-
-const OTHER_EXPERIMENTS: OtherExperiment[] = [
-  {
-    title: "PopStruct",
-    desc: "Cloud-based genomics platform for analyzing genetic diversity using PCA and K-means clustering.",
-    url: "https://popstruct-i3ab.vercel.app/"
+    category: 'Bioprocess & Modeling',
+    items: ['Hybrid Modeling', 'Digital Twins', 'ODEs', 'Extended Kalman Filter', 'Raman Spectroscopy'],
   },
   {
-    title: "SpyderCare",
-    desc: "Empathetic AI chatbot for student mental health using NLP and sentiment analysis.",
-    url: "https://spydercare.vercel.app/"
+    category: 'Engineering & MLOps',
+    items: ['Python', 'OpenCV', 'FastAPI', 'Docker', 'DVC', 'Git & Linux'],
+  },
+];
+
+const EXPERIENCE = [
+  {
+    year: '2026',
+    role: 'Machine Learning Engineer',
+    company: 'Ipca Laboratories Ltd.',
+    description:
+      'Developing hybrid mechanistic-ML models and digital twins for upstream bioprocess optimization, real-time state estimation, and predictive biomanufacturing.',
   },
   {
-    title: "Covid Coinfections",
-    desc: "Analyzing SARS-CoV-2 coinfections and viral evolution using NGS data pipelines.",
-    url: "https://economic-rayon-049.notion.site/Project-Report-128f44542832805cbfd7fc2f7299b9cc"
+    year: '2024',
+    role: 'Machine Learning Engineer',
+    company: 'Ankur Seeds Pvt. Ltd.',
+    description:
+      'Built automated computer vision pipelines using deep object detection, instance segmentation, and metric learning for agricultural seed quality control and variety classification.',
+  },
+];
+
+const PROJECTS = [
+  {
+    title: 'BioShift',
+    description:
+      'Open-source machine learning framework for processing Raman spectroscopy data and enabling real-time metabolite monitoring in upstream bioprocessing.',
+    tags: ['Python', 'Chemometrics', 'PyTorch', 'Bioprocess', 'ML'],
+    image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
   },
   {
-    title: "Restriction sites to Insights",
-    desc: "Genotyping-by-Sequencing (GBS) analysis of 471 rice taxa to identify SNPs and population structure.",
-    url: "https://www.notion.so/Project-Report-128f4454283280fc9e8be4f63972ca09"
-  }
+    title: 'GermiNet',
+    description:
+      'Automated computer vision system utilizing Mask R-CNN for high-throughput multi-seed instance segmentation and germination classification.',
+    tags: ['Mask R-CNN', 'OpenCV', 'PyTorch', 'Computer Vision', 'Python'],
+    image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
+  },
+  {
+    title: 'GrainVue',
+    description:
+      'Deep metric learning and Fast R-CNN pipeline designed for fine-grained visual seed variety identification and automated purity grading.',
+    tags: ['Fast R-CNN', 'Metric Learning', 'PyTorch', 'OpenCV', 'FastAPI'],
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
+  },
+  {
+    title: 'Bioprocess Digital Twin',
+    description:
+      'Hybrid mechanistic-ML architecture combining ODE mass balances with Gaussian Process Regression and Extended Kalman Filtering.',
+    tags: ['ODEs', 'GPR', 'EKF', 'Python', 'Digital Twin'],
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
+  },
+  {
+    title: 'COCO-Polygon-Optimizer',
+    description:
+      'Lightweight utility tool for converting, simplifying, and optimizing complex segmentation masks and polygon annotations in COCO format.',
+    tags: ['Python', 'Computer Vision', 'COCO', 'Data Tooling', 'OpenCV'],
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
+  },
+  {
+    title: 'Glitch Descent',
+    description:
+      'Interactive text-based narrative game featuring branching storylines, state-driven mechanics, and atmospheric terminal aesthetics.',
+    tags: ['Python', 'Game Dev', 'Interactive Fiction', 'CLI', 'Logic'],
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
+    detailsUrl: 'https://github.com/plunkix',
+    githubUrl: 'https://github.com/plunkix',
+  },
 ];
-
-const OBSESSIONS: Obsession[] = [
-  { label: "Building", value: "CHO Cell Digital Twins" },
-  { label: "Reading", value: "The Beginning of Infinity - David Deutsch" },
-  { label: "Learning", value: "Mechanistic Modeling" },
-  { label: "Thinking About", value: "Biological Intelligence" }
-];
-
-const TIMELINE: TimelineItem[] = [
-  { year: "2023", text: "Emotional NLP, RNA-Seq, and NGS pipelines." },
-  { year: "2024", text: "Genotyping-by-Sequencing and applied ML." },
-  { year: "2025", text: "Computer vision architectures for phenotyping." },
-  { year: "2026", text: "Digital twins for bioprocess automation." }
-];
-
-// 1. The Living Network Background (Scroll Driven)
-const LivingNetwork = ({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) => {
-  const path1Length = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-  const path2Length = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
-  const path3Length = useTransform(scrollYProgress, [0.2, 1], [0, 1]);
-
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 flex justify-center overflow-hidden opacity-[0.15]">
-      <svg className="w-full max-w-5xl h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <motion.path d="M 20 0 C 30 20, 10 50, 40 80 C 60 100, 50 100, 50 100" fill="transparent" stroke="#F5F5F7" strokeWidth="0.05" style={{ pathLength: path1Length }} />
-        <motion.path d="M 80 0 C 70 30, 90 60, 50 80 C 40 100, 50 100, 50 100" fill="transparent" stroke="#F5F5F7" strokeWidth="0.05" style={{ pathLength: path2Length }} />
-        <motion.path d="M 50 0 C 60 40, 40 60, 50 100" fill="transparent" stroke="#006B3D" strokeWidth="0.03" style={{ pathLength: path3Length }} />
-      </svg>
-    </div>
-  );
-};
-
-// 2. Navigation with Dynamic Scroll Sizing
-const Navigation = ({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) => {
-  // Scale the name from 1.5x down to 1x as the user scrolls the first 10% of the page
-  const nameScale = useTransform(scrollYProgress, [0, 0.1], [1.5, 1]);
-  
-  return (
-    <nav className="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <motion.div 
-        style={{ scale: nameScale, transformOrigin: "left center" }}
-        className="text-xl md:text-2xl font-medium tracking-tight text-[#F5F5F7]"
-      >
-        Srushti Tathe
-      </motion.div>
-      <div className="flex gap-6 text-xs tracking-widest uppercase font-medium text-[#86868B]">
-        <a href="#experiments" className="hover:text-[#F5F5F7] transition-colors">Work</a>
-        <a href="#timeline" className="hover:text-[#F5F5F7] transition-colors">Trajectory</a>
-        <a href="#contact" className="hover:text-[#F5F5F7] transition-colors">Contact</a>
-      </div>
-    </nav>
-  );
-};
-
-// 3. Experiment Block with Subtle Terminal Hover
-const ExperimentBlock = ({ exp }: { exp: Experiment }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div 
-      className="py-16 md:py-24 border-t border-[#111111] relative group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 relative z-10">
-        <p className="text-[#86868B] font-medium tracking-widest text-sm w-24">EXP //{exp.id}</p>
-        <div className="flex-1">
-          <h3 className="text-4xl md:text-6xl font-medium tracking-tight text-[#F5F5F7] mb-6 transition-colors duration-500">
-            {exp.title}
-          </h3>
-          <p className="text-lg md:text-2xl text-[#86868B] max-w-2xl font-light leading-relaxed mb-10">
-            {exp.desc}
-          </p>
-          <div className="flex flex-wrap gap-8">
-            {exp.links.map((link: Link, idx: number) => (
-              <a key={idx} href={link.url} target="_blank" rel="noreferrer" className="text-sm tracking-widest uppercase text-[#F5F5F7] pb-1 border-b border-[#333333] hover:border-[#F5F5F7] transition-colors duration-300">
-                {link.label} &rarr;
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Subtle Terminal Reveal (Desktop Only) */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: 5, filter: "blur(4px)" }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="absolute bottom-10 right-0 bg-[#050505] border border-[#111111] p-6 hidden lg:block z-0 w-80 shadow-2xl rounded-md"
-          >
-            <div className="flex gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full bg-[#333333]"></div>
-              <div className="w-2 h-2 rounded-full bg-[#333333]"></div>
-              <div className="w-2 h-2 rounded-full bg-[#333333]"></div>
-            </div>
-            <div className="font-mono text-xs text-[#006B3D] space-y-2 opacity-80">
-              {exp.logs.map((log: string, i: number) => (
-                <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.15 }}>
-                  {log}
-                </motion.p>
-              ))}
-              <motion.p animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1 }}>_</motion.p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
 
 export default function App() {
-  const { scrollYProgress } = useScroll();
-  const cinematicEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
   return (
-    <div className="min-h-screen bg-[#000000] text-[#F5F5F7] font-sans selection:bg-[#F5F5F7] selection:text-[#000000] overflow-x-hidden">
-      <Navigation scrollYProgress={scrollYProgress} />
-      <LivingNetwork scrollYProgress={scrollYProgress} />
-
-      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 pt-32">
-        
-        {/* HERO SECTION */}
-        <section className="min-h-[80vh] flex flex-col justify-center pb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: cinematicEase }}
-            className="space-y-6 mt-16"
+    <div className="min-h-screen bg-[#070709] text-white font-sans selection:bg-[#7c3aed] selection:text-white">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#070709]/80 border-b border-white/5">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a
+            href="#home"
+            className="text-xl font-bold italic bg-gradient-to-r from-[#a855f7] to-[#6366f1] bg-clip-text text-transparent tracking-wide"
           >
-            {/* The Kicker / Theme restored to full size */}
-            <h1 className="text-[3.5rem] md:text-[9rem] leading-[0.9] font-medium tracking-tighter text-[#F5F5F7]">
-              BIOLOGY
-              <motion.span 
-                className="block text-[#333333] font-light text-5xl md:text-8xl my-2 md:my-6 ml-2 md:ml-4"
-                initial={{ rotate: -45, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 2, delay: 0.5, ease: cinematicEase }}
+            ifelsecry
+          </a>
+          <nav className="hidden sm:flex items-center space-x-7 text-xs font-medium text-gray-300">
+            <a href="#home" className="text-[#a855f7] hover:text-[#a855f7] transition">Home</a>
+            <a href="#about" className="hover:text-[#a855f7] transition">About</a>
+            <a href="#projects" className="hover:text-[#a855f7] transition">Projects</a>
+            <a href="#experience" className="hover:text-[#a855f7] transition">Experience</a>
+            <a href="#contact" className="hover:text-[#a855f7] transition">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section id="home" className="max-w-4xl mx-auto px-6 pt-20 pb-24 text-center">
+        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-[#1a102d] border border-[#7c3aed]/40 text-[#c084fc] text-xs font-medium">
+          Available for new Projects
+        </div>
+
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+          Hey! , I am <span className="text-[#8b5cf6]">Srushti</span>
+        </h1>
+
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-200 mb-6">
+          Machine Learning Engineer
+        </h2>
+
+        <p className="max-w-xl mx-auto text-gray-400 text-sm sm:text-base leading-relaxed mb-10">
+          I build intelligent computer vision systems and hybrid bioprocess digital twins that bridge machine learning with real-world biological systems.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#projects"
+            className="px-7 py-2.5 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#6d28d9] hover:from-[#7c3aed] hover:to-[#5b21b6] text-white text-xs sm:text-sm font-semibold shadow-lg shadow-[#8b5cf6]/25 transition"
+          >
+            View My Work
+          </a>
+          <a
+            href="#contact"
+            className="px-7 py-2.5 rounded-full bg-transparent border border-[#8b5cf6]/50 hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/10 text-gray-200 text-xs sm:text-sm font-semibold transition"
+          >
+            Get in Touch
+          </a>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-white/10" />
+
+      {/* About, Skills & Experience Section */}
+      <section id="about" className="max-w-4xl mx-auto px-6 py-20">
+        {/* About Me */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center mb-20">
+          <div className="md:col-span-7 space-y-4">
+            <h3 className="text-2xl font-bold text-white mb-4">About Me</h3>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              I'm a Machine Learning Engineer with a background in Biotechnology Engineering, specializing in predictive modeling, hybrid digital twins, and deep computer vision pipelines.
+            </p>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              Whether I'm combining ordinary differential equations with Gaussian Process Regression for upstream bioprocesses, or training Mask R-CNN models for high-precision segmentation, I love turning noisy real-world data into reliable production systems.
+            </p>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              I'm always excited to collaborate on ambitious AI, scientific computing, and computer vision projects that push technical boundaries.
+            </p>
+          </div>
+
+          {/* Pixel Cat / Retro Graphic */}
+          <div className="md:col-span-5 flex justify-center">
+            <div className="relative w-48 h-48 flex items-center justify-center">
+              <svg
+                viewBox="0 0 16 16"
+                className="w-40 h-40 drop-shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                shapeRendering="crispEdges"
               >
-                ×
-              </motion.span>
-              INTELLIGENCE
-            </h1>
-            
-            <div className="pt-8 md:pt-12 max-w-2xl">
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2, delay: 1 }}
-                className="text-lg md:text-3xl text-[#86868B] font-light leading-relaxed tracking-tight"
-              >
-                I design intelligent systems. My work is not limited to just algorithms. I build end-to-end architectures, bridging computer vision, biological automation, and digital twins.
-              </motion.p>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2, delay: 1.5 }}
-                className="mt-12 flex flex-col sm:flex-row gap-6 sm:items-center text-xs md:text-sm tracking-widest uppercase font-medium"
-              >
-                <div className="text-[#006B3D] flex items-center gap-3">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#006B3D] opacity-40"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#006B3D]"></span>
-                  </span>
-                  Current focus: CHO Cell Digital Twins
-                </div>
-              </motion.div>
+                {/* Sparkles */}
+                <rect x="2" y="3" width="1" height="1" fill="#8b5cf6" />
+                <rect x="13" y="2" width="1" height="1" fill="#a855f7" />
+                <rect x="12" y="1" width="1" height="1" fill="#6366f1" />
+                <rect x="14" y="12" width="1" height="1" fill="#8b5cf6" />
+                <rect x="1" y="11" width="1" height="1" fill="#6366f1" />
+                {/* Pixel Cat Silhouette */}
+                <path
+                  fill="#a78bfa"
+                  d="M4 5h2v2h4V5h2v3h1v4H3V8h1V5zm-2 4h1v2H2V9zm11 0h1v2h-1V9z"
+                />
+                {/* Eyes */}
+                <rect x="5" y="9" width="1" height="1" fill="#1e1b4b" />
+                <rect x="10" y="9" width="1" height="1" fill="#1e1b4b" />
+                {/* Cheeks */}
+                <rect x="4" y="10" width="1" height="1" fill="#c084fc" />
+                <rect x="11" y="10" width="1" height="1" fill="#c084fc" />
+              </svg>
             </div>
-          </motion.div>
-        </section>
+          </div>
+        </div>
 
-        {/* CINEMATIC MANIFESTO */}
-        <section className="py-32 md:py-64 max-w-4xl mx-auto text-center">
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 2, ease: cinematicEase }}
-            className="text-3xl md:text-5xl lg:text-7xl font-medium tracking-tighter text-[#F5F5F7] leading-tight"
-          >
-            <span className="text-[#333333]">Watching</span> life evolve <span className="text-[#333333]">into</span> intelligence.
-          </motion.p>
-        </section>
-
-        {/* SELECTED EXPERIMENTS */}
-        <section id="experiments" className="py-24">
-          <h2 className="text-xs tracking-widest uppercase text-[#86868B] font-medium mb-16">Selected Works</h2>
-          {EXPERIMENTS.map((exp: Experiment) => (
-            <ExperimentBlock key={exp.id} exp={exp} />
-          ))}
-        </section>
-
-        {/* OTHER EXPERIMENTS */}
-        <section className="py-24 border-t border-[#111111]">
-          <h2 className="text-xs tracking-widest uppercase text-[#86868B] font-medium mb-16">Other Explorations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-            {OTHER_EXPERIMENTS.map((exp: OtherExperiment, idx: number) => (
-              <a key={idx} href={exp.url} target="_blank" rel="noreferrer" className="group block">
-                <div className="border-t border-[#333333] pt-6 transition-colors duration-500 group-hover:border-[#006B3D]">
-                  <h4 className="text-2xl font-medium text-[#F5F5F7] mb-3">{exp.title}</h4>
-                  <p className="text-[#86868B] font-light leading-relaxed mb-6">{exp.desc}</p>
-                  <span className="text-xs tracking-widest uppercase text-[#F5F5F7] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Explore &rarr;
-                  </span>
+        {/* Skills & Technologies */}
+        <div className="mb-20">
+          <h3 className="text-xl font-bold text-white mb-6">Skills & Technologies</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {SKILLS.map((group, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-xl bg-[#111116] border border-white/5 hover:border-[#8b5cf6]/40 transition"
+              >
+                <h4 className="text-xs font-bold text-white mb-4">{group.category}</h4>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#1a102d] text-[#c084fc] border border-[#7c3aed]/40"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              </a>
+              </div>
             ))}
           </div>
-        </section>
-
-        {/* CURRENT OBSESSIONS */}
-        <section className="py-32 md:py-48 border-t border-[#111111]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-            <div className="md:col-span-4">
-              <h2 className="text-xs tracking-widest uppercase text-[#86868B] font-medium">Currently</h2>
-            </div>
-            <div className="md:col-span-8 space-y-16">
-              {OBSESSIONS.map((item: Obsession, i: number) => (
-                <div key={i} className="group">
-                  <p className="text-[#86868B] text-sm md:text-base tracking-widest uppercase mb-3 font-medium">{item.label}</p>
-                  <motion.p 
-                    animate={{ opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 4, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
-                    className="text-2xl md:text-5xl font-medium tracking-tight text-[#F5F5F7]"
-                  >
-                    {item.value}
-                  </motion.p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* TIMELINE */}
-        <section id="timeline" className="py-32 md:py-48 border-t border-[#111111]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-             <div className="md:col-span-4">
-              <h2 className="text-xs tracking-widest uppercase text-[#86868B] font-medium">Trajectory</h2>
-            </div>
-            <div className="md:col-span-8 flex flex-col gap-16 border-l border-[#111111] pl-8 md:pl-16">
-              {TIMELINE.map((item: TimelineItem, i: number) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 1, delay: i * 0.2, ease: cinematicEase }}
-                  className="relative"
-                >
-                  <div className="absolute -left-[33px] md:-left-[65px] top-1.5 w-1.5 h-1.5 rounded-full bg-[#F5F5F7]"></div>
-                  <p className="text-xs tracking-widest uppercase text-[#86868B] mb-3">{item.year}</p>
-                  <p className="text-xl md:text-3xl font-light text-[#F5F5F7] max-w-xl">{item.text}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      {/* FOOTER */}
-      <footer id="contact" className="py-32 border-t border-[#111111] relative z-10">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 2 }}
-            className="space-y-6 w-full"
-          >
-            <p className="text-3xl md:text-5xl text-[#F5F5F7] font-medium tracking-tighter">Let's Connect.</p>
-            <p className="text-sm tracking-widest text-[#86868B] uppercase">Results remain inconclusive.</p>
-            
-            <div className="pt-16 pb-24 flex flex-wrap justify-center gap-8 md:gap-12 text-sm tracking-widest text-[#F5F5F7] uppercase font-medium">
-              <a href="mailto:tathesrushti03@gmail.com" className="hover:text-[#006B3D] transition-colors duration-300">Email</a>
-              <a href="https://github.com/plunkix" target="_blank" rel="noreferrer" className="hover:text-[#006B3D] transition-colors duration-300">GitHub</a>
-              <a href="https://in.linkedin.com/in/plunkix30002" target="_blank" rel="noreferrer" className="hover:text-[#006B3D] transition-colors duration-300">LinkedIn</a>
-              <a href="https://x.com/juiiyarr" target="_blank" rel="noreferrer" className="hover:text-[#006B3D] transition-colors duration-300">Twitter / X</a>
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-center w-full text-xs text-[#333333] tracking-widest uppercase border-t border-[#111111] pt-8">
-              <p>© 2026 Srushti Tathe.</p>
-              <p className="mt-4 md:mt-0">Built with code.</p>
-            </div>
-          </motion.div>
         </div>
-      </footer>
+
+        {/* Experience */}
+        <div id="experience">
+          <h3 className="text-xl font-bold text-white mb-8">Experience</h3>
+          <div className="relative pl-6 sm:pl-8 space-y-6 before:content-[''] before:absolute before:top-4 before:bottom-4 before:left-[19px] sm:before:left-[27px] before:w-0.5 before:bg-[#8b5cf6]/40">
+            {EXPERIENCE.map((exp, idx) => (
+              <div key={idx} className="relative flex items-start gap-5">
+                {/* Year Circle */}
+                <div className="relative z-10 -ml-6 sm:-ml-8 w-10 h-10 rounded-full bg-[#8b5cf6] text-white text-[11px] font-bold flex items-center justify-center shrink-0 shadow-md shadow-[#8b5cf6]/40">
+                  {exp.year}
+                </div>
+
+                {/* Experience Card */}
+                <div className="flex-1 p-5 rounded-xl bg-[#111116] border border-white/5">
+                  <h4 className="text-sm font-bold text-white">{exp.role}</h4>
+                  <p className="text-xs text-[#8b5cf6] font-medium mb-2">{exp.company}</p>
+                  <p className="text-xs text-gray-400 leading-relaxed">{exp.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-white/10" />
+
+      {/* My Projects Section */}
+      <section id="projects" className="max-w-4xl mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">My Projects</h3>
+          <p className="text-gray-400 text-xs sm:text-sm max-w-md mx-auto">
+            A collection of projects I've worked on, ranging from computer vision pipelines to bioprocess digital twins.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {PROJECTS.map((project, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl overflow-hidden bg-[#111116] border border-white/10 hover:border-[#8b5cf6]/50 transition flex flex-col"
+            >
+              <div className="h-36 overflow-hidden bg-[#1a102d] relative">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:opacity-100 transition duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-[#8b5cf6]/20 to-transparent" />
+              </div>
+
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white mb-1.5">{project.title}</h4>
+                  <p className="text-[11px] text-gray-400 leading-relaxed mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2.5 py-0.5 rounded-full text-[9px] font-medium bg-[#1a102d] text-[#c084fc] border border-[#7c3aed]/40"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card Footer Buttons */}
+                <div className="flex items-center gap-2 pt-2 border-t border-white/5">
+                  <a
+                    href={project.detailsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 py-1.5 rounded-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-center text-white text-[11px] font-semibold transition"
+                  >
+                    View Details
+                  </a>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub Repository"
+                    className="w-7 h-7 rounded-full border border-white/15 hover:border-[#8b5cf6] flex items-center justify-center text-gray-400 hover:text-white text-xs transition"
+                  >
+                    ↗
+                  </a>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Source Code"
+                    className="w-7 h-7 rounded-full border border-white/15 hover:border-[#8b5cf6] flex items-center justify-center text-gray-400 hover:text-white text-xs transition"
+                  >
+                    {'<>'}
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-white/10" />
+
+      {/* Let's Work Together Section */}
+      <section id="contact" className="max-w-4xl mx-auto px-6 py-20">
+        <h3 className="text-2xl font-bold text-center text-white mb-12">
+          Let's Work Together
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          {/* Left Form Card */}
+          <div className="p-6 rounded-xl bg-[#0c0c10] border border-white/10">
+            <h4 className="text-xs font-bold text-white mb-4">Send me a message</h4>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Thanks for reaching out!');
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block text-[11px] text-gray-300 mb-1">Name</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-3 py-2 rounded-lg bg-[#070709] border border-[#8b5cf6]/40 focus:border-[#8b5cf6] focus:outline-none text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-gray-300 mb-1">Email</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-3 py-2 rounded-lg bg-[#070709] border border-[#8b5cf6]/40 focus:border-[#8b5cf6] focus:outline-none text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-gray-300 mb-1">Message</label>
+                <textarea
+                  rows={4}
+                  required
+                  className="w-full px-3 py-2 rounded-lg bg-[#070709] border border-[#8b5cf6]/40 focus:border-[#8b5cf6] focus:outline-none text-xs text-white resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] hover:from-[#7c3aed] hover:to-[#6d28d9] text-white text-xs font-semibold transition cursor-pointer"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          {/* Right Info & Socials Stack */}
+          <div className="space-y-6">
+            <div className="p-6 rounded-xl bg-[#0c0c10] border border-white/10">
+              <p className="text-xs text-gray-400 leading-relaxed mb-4">
+                I'm always open to discussing new opportunities, research collaborations, or machine learning projects. Whether you have a specific problem in mind or just want to connect, I'd love to hear from you.
+              </p>
+              <ul className="space-y-1.5 text-xs text-gray-300 list-disc list-inside">
+                <li>Predictive Bioprocess Modeling & Digital Twins</li>
+                <li>Computer Vision & Deep Segmentation</li>
+                <li>Machine Learning Engineering & MLOps</li>
+                <li>Research & Technical Collaborations</li>
+              </ul>
+            </div>
+
+            <div className="p-6 rounded-xl bg-[#0c0c10] border border-white/10">
+              <h4 className="text-xs font-bold text-white mb-4">My Socials</h4>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/plunkix"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#1a102d] border border-[#8b5cf6]/40 flex items-center justify-center text-[#a855f7] hover:bg-[#8b5cf6] hover:text-white text-xs font-bold transition"
+                >
+                  GH
+                </a>
+                <a
+                  href="mailto:contact@ifelsecry.xyz"
+                  className="w-8 h-8 rounded-lg bg-[#1a102d] border border-[#8b5cf6]/40 flex items-center justify-center text-[#a855f7] hover:bg-[#8b5cf6] hover:text-white text-xs font-bold transition"
+                >
+                  ✉
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#1a102d] border border-[#8b5cf6]/40 flex items-center justify-center text-[#a855f7] hover:bg-[#8b5cf6] hover:text-white text-xs font-bold transition"
+                >
+                  in
+                </a>
+                <a
+                  href="https://ifelsecry.xyz"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-[#1a102d] border border-[#8b5cf6]/40 flex items-center justify-center text-[#a855f7] hover:bg-[#8b5cf6] hover:text-white text-xs font-bold transition"
+                >
+                  🌐
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
