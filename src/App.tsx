@@ -1,5 +1,3 @@
-
-
 const SKILLS = [
   {
     category: 'Machine Learning & AI',
@@ -164,31 +162,123 @@ export default function App() {
             </p>
           </div>
 
-          {/* Pixel Cat / Retro Graphic */}
+          {/* Cute Animated Pixel Cat */}
           <div className="md:col-span-5 flex justify-center">
-            <div className="relative w-48 h-48 flex items-center justify-center">
+            <style>{`
+              @keyframes floatCat {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+              }
+              @keyframes blinkEyes {
+                0%, 92%, 100% { transform: scaleY(1); }
+                96% { transform: scaleY(0.1); }
+              }
+              @keyframes wagTail {
+                0%, 100% { transform: rotate(0deg); }
+                50% { transform: rotate(8deg) translateY(-1px); }
+              }
+              @keyframes twinkle1 {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.25; transform: scale(0.75); }
+              }
+              @keyframes twinkle2 {
+                0%, 100% { opacity: 0.3; transform: scale(0.8); }
+                50% { opacity: 1; transform: scale(1.15); }
+              }
+              @keyframes heartFloat {
+                0%, 100% { transform: translateY(0px) scale(1); opacity: 0.85; }
+                50% { transform: translateY(-5px) scale(1.1); opacity: 1; }
+              }
+            `}</style>
+
+            <div className="relative w-56 h-56 flex items-center justify-center group cursor-pointer">
+              {/* Soft Purple Glow Behind Cat */}
+              <div className="absolute w-36 h-36 bg-[#8b5cf6]/25 rounded-full blur-2xl group-hover:bg-[#ec4899]/30 transition duration-500" />
+
               <svg
-                viewBox="0 0 16 16"
-                className="w-40 h-40 drop-shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                viewBox="0 0 24 24"
+                className="w-48 h-48 drop-shadow-[0_0_20px_rgba(168,85,247,0.45)]"
                 shapeRendering="crispEdges"
+                style={{ animation: 'floatCat 3.2s ease-in-out infinite' }}
               >
-                {/* Sparkles */}
-                <rect x="2" y="3" width="1" height="1" fill="#8b5cf6" />
-                <rect x="13" y="2" width="1" height="1" fill="#a855f7" />
-                <rect x="12" y="1" width="1" height="1" fill="#6366f1" />
-                <rect x="14" y="12" width="1" height="1" fill="#8b5cf6" />
-                <rect x="1" y="11" width="1" height="1" fill="#6366f1" />
-                {/* Pixel Cat Silhouette */}
-                <path
-                  fill="#a78bfa"
-                  d="M4 5h2v2h4V5h2v3h1v4H3V8h1V5zm-2 4h1v2H2V9zm11 0h1v2h-1V9z"
-                />
-                {/* Eyes */}
-                <rect x="5" y="9" width="1" height="1" fill="#1e1b4b" />
-                <rect x="10" y="9" width="1" height="1" fill="#1e1b4b" />
-                {/* Cheeks */}
-                <rect x="4" y="10" width="1" height="1" fill="#c084fc" />
-                <rect x="11" y="10" width="1" height="1" fill="#c084fc" />
+                {/* Twinkling Sparkles Group 1 */}
+                <g style={{ animation: 'twinkle1 2.2s ease-in-out infinite', transformOrigin: 'center' }}>
+                  <rect x="19" y="3" width="1" height="3" fill="#c084fc" />
+                  <rect x="18" y="4" width="3" height="1" fill="#c084fc" />
+                  <rect x="19" y="4" width="1" height="1" fill="#ffffff" />
+
+                  <rect x="2" y="16" width="1" height="1" fill="#818cf8" />
+                  <rect x="3" y="17" width="1" height="1" fill="#c084fc" />
+                </g>
+
+                {/* Twinkling Sparkles Group 2 */}
+                <g style={{ animation: 'twinkle2 2.8s ease-in-out infinite', transformOrigin: 'center' }}>
+                  <rect x="5" y="4" width="1" height="3" fill="#818cf8" />
+                  <rect x="4" y="5" width="3" height="1" fill="#818cf8" />
+
+                  <rect x="18" y="19" width="2" height="2" fill="#818cf8" />
+                  <rect x="18.5" y="19.5" width="1" height="1" fill="#070709" />
+                  <rect x="21" y="17" width="1" height="2" fill="#c084fc" />
+                  <rect x="20.5" y="17.5" width="2" height="1" fill="#c084fc" />
+                </g>
+
+                {/* Floating Cute Pixel Heart */}
+                <g style={{ animation: 'heartFloat 2.4s ease-in-out infinite' }}>
+                  <rect x="11" y="4" width="1" height="1" fill="#f472b6" />
+                  <rect x="13" y="4" width="1" height="1" fill="#f472b6" />
+                  <rect x="10" y="5" width="5" height="1" fill="#f472b6" />
+                  <rect x="11" y="6" width="3" height="1" fill="#f472b6" />
+                  <rect x="12" y="7" width="1" height="1" fill="#f472b6" />
+                </g>
+
+                {/* Wagging Curled Tail */}
+                <g style={{ animation: 'wagTail 1.8s ease-in-out infinite', transformOrigin: '7px 15px' }}>
+                  <rect x="3" y="11" width="2" height="2" fill="#a78bfa" />
+                  <rect x="2" y="12" width="2" height="3" fill="#a78bfa" />
+                  <rect x="3" y="14" width="4" height="2" fill="#a78bfa" />
+                </g>
+
+                {/* Cat Ears */}
+                <rect x="7" y="8" width="1" height="1" fill="#a78bfa" />
+                <rect x="7" y="9" width="2" height="1" fill="#a78bfa" />
+                <rect x="6" y="10" width="4" height="1" fill="#a78bfa" />
+
+                <rect x="17" y="8" width="1" height="1" fill="#a78bfa" />
+                <rect x="16" y="9" width="2" height="1" fill="#a78bfa" />
+                <rect x="15" y="10" width="4" height="1" fill="#a78bfa" />
+
+                {/* Pink Inner Ears */}
+                <rect x="7" y="10" width="1" height="1" fill="#f472b6" />
+                <rect x="17" y="10" width="1" height="1" fill="#f472b6" />
+
+                {/* Main Chubby Cat Head & Body */}
+                <rect x="6" y="11" width="13" height="5" fill="#a78bfa" />
+                <rect x="5" y="12" width="15" height="3" fill="#a78bfa" />
+                <rect x="7" y="16" width="11" height="1" fill="#a78bfa" />
+
+                {/* Cute Little Paws */}
+                <rect x="8" y="17" width="2" height="1" fill="#ddd6fe" />
+                <rect x="15" y="17" width="2" height="1" fill="#ddd6fe" />
+
+                {/* Whiskers */}
+                <rect x="4" y="13" width="1" height="1" fill="#c4b5fd" />
+                <rect x="20" y="13" width="1" height="1" fill="#c4b5fd" />
+
+                {/* Blinking Eyes with Kawaii Eye Shine */}
+                <g style={{ animation: 'blinkEyes 4s infinite', transformOrigin: '12px 13.5px' }}>
+                  <rect x="8" y="13" width="2" height="2" fill="#1e1b4b" />
+                  <rect x="8" y="13" width="1" height="1" fill="#ffffff" />
+
+                  <rect x="15" y="13" width="2" height="2" fill="#1e1b4b" />
+                  <rect x="15" y="13" width="1" height="1" fill="#ffffff" />
+                </g>
+
+                {/* Rosy Pink Blushing Cheeks */}
+                <rect x="6" y="14" width="2" height="1" fill="#f472b6" />
+                <rect x="17" y="14" width="2" height="1" fill="#f472b6" />
+
+                {/* Tiny Pink Nose / Mouth */}
+                <rect x="12" y="14" width="1" height="1" fill="#f472b6" />
               </svg>
             </div>
           </div>
